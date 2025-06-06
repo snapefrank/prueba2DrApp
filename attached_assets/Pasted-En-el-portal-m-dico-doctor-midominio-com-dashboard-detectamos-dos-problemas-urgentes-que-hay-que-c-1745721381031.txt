@@ -1,0 +1,71 @@
+En el portal médico (doctor.midominio.com/dashboard) detectamos dos problemas urgentes que hay que corregir:
+
+1. Sidebar duplicado
+Problema: Se está renderizando dos menús laterales superpuestos en el dashboard de médico.
+Causa probable:
+
+El Layout principal ya incluye el <Sidebar />, pero en la página de doctor (DoctorDashboard o similar) se vuelve a importar y renderizar otro <Sidebar />.
+
+O bien, el DashboardLayout se está envolviendo dos veces alrededor del contenido.
+
+Acciones requeridas:
+
+Revisa tu componente de layout (p. ej. DashboardLayout.tsx) y elimina cualquier importación o renderizado de <Sidebar /> que no corresponda.
+
+Asegúrate de que solo DashboardLayout (/layouts/DashboardLayout) incluya el <Sidebar> y que ninguna página hija (como /pages/doctor/index.tsx) vuelva a montarlo.
+
+Comprueba en AppRouter o donde definas rutas de React Router que el componente DoctorDashboard no vuelva a envolver el layout otra vez.
+
+2. Enlaces del sidebar no navegan (página en blanco)
+Problema: Al hacer clic en cualquiera de las secciones del menú (“Pacientes”, “Agenda”, “Recetas”…) la app intenta redirigir pero cae en una pantalla blanca sin renderizar nada y sin error en console.
+
+Causa probable:
+
+Las rutas anidadas del dashboard de médico no están definidas correctamente en React Router, por lo que React no encuentra el componente para esa ruta y termina mostrando un “blank screen”.
+
+Los <Link> o navigate() están apuntando a rutas mal construidas (por ejemplo to="/pacientes" en lugar de to="/dashboard/pacientes").
+
+Acciones requeridas:
+
+Revisa tu configuración de rutas (p. ej. en AppRouter.tsx o router/index.tsx):
+
+tsx
+Copiar
+Editar
+<Route path="/dashboard" element={<DashboardLayout />}>
+  {/* Home del dashboard */}
+  <Route index element={<DashboardHome />} />
+
+  {/* Rutas del portal médico */}
+  <Route path="pacientes" element={<PacientesPage />} />
+  <Route path="agenda"    element={<AgendaPage />} />
+  <Route path="recetas"   element={<RecetasPage />} />
+  {/* …y así con laboratorio, expedientes, consulta, tareas, mensajes */}
+  <Route path="mensajes"  element={<MensajesPage />} />
+
+  {/* Fallback interno */}
+  <Route path="*" element={<NotFound />} />
+</Route>
+Verifica que los enlaces del sidebar usen exactamente esos paths relativos:
+
+tsx
+Copiar
+Editar
+<Link to="/dashboard/pacientes">Pacientes</Link>
+<Link to="/dashboard/agenda">Agenda</Link>
+{/* … */}
+Depura el “blank screen” añadiendo un <Route path="*" element={<div>Ruta no encontrada</div>} /> dentro del /dashboard. Si ves ese div en blanco, sabrás que la ruta no existe.
+
+Comprueba que cada uno de los componentes importados (PacientesPage, AgendaPage, etc.) retorne algo mínimo (p. ej. un <h1>Agenda</h1>) para descartar errores de render.
+
+Habilita logs de React Router para ver la ruta activa:
+
+tsx
+Copiar
+Editar
+import { useLocation } from 'react-router-dom';
+function DashboardLayout() {
+  const loc = useLocation();
+  console.log('Ruta activa:', loc.pathname);
+  // …
+}

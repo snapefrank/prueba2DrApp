@@ -1,0 +1,67 @@
+Propósito principal de tu aplicación
+El propósito de esta aplicación es ofrecer una plataforma médica basada en suscripción anual, que permita a cualquier persona tener acceso fácil, rápido y organizado a servicios de salud, sin necesidad de pertenecer a una aseguradora.
+Queremos que la salud esté literalmente al alcance de tu mano, lista para cuando la necesites, sin filas ni complicaciones.
+
+⚙️ Funciones principales que deseas incluir
+Landing page informativa con beneficios, testimonios y una propuesta clara de valor.
+
+Inicio de sesión (login) para tres tipos de usuarios: paciente, médico y administrador.
+
+Panel para pacientes:
+
+Agendar citas por especialidad y horario.
+
+Subir documentos médicos.
+
+Consultar su historial clínico.
+
+Panel para médicos:
+
+Ver agenda de pacientes.
+
+Acceder y editar expediente clínico digital (notas, diagnósticos, archivos, recetas).
+
+Ver comisiones generadas por laboratorios.
+
+Panel de administrador:
+
+Gestión de usuarios y laboratorios.
+
+Activar/desactivar médicos o clínicas.
+
+Ver estadísticas básicas de uso.
+
+Sidebar y Navbar dinámicos según el tipo de usuario que haya iniciado sesión.
+
+Diseño responsivo y profesional, accesible desde computadora, celular y tablet.
+
+🎨 Preferencias de diseño
+Estilo limpio, moderno y profesional (similar a Doctoralia o Zocdoc).
+
+Paleta de colores: tonos azules, blancos y grises claros.
+
+Tipografía clara, botones con sombras suaves, íconos intuitivos.
+
+Login siempre visible en la parte superior derecha.
+
+Experiencia fluida sin distracciones, con enfoque en facilidad de uso.
+
+🎯 Público objetivo
+Pacientes jóvenes y adultos que buscan agendar citas médicas de forma simple y sin pertenecer a un seguro.
+
+Médicos independientes o en clínicas que desean llenar su agenda, gestionar pacientes y recibir comisiones por laboratorios aliados.
+
+Administradores de salud que gestionan clínicas, laboratorios o centros médicos y buscan orden y control en un solo lugar.
+
+💻 Requisitos técnicos o preferencias
+Proyecto construido en React.js con Tailwind CSS.
+
+Uso de rutas protegidas y navegación con React Router.
+
+Componentes separados por rol de usuario.
+
+Uso de datos simulados (mock) para pruebas locales.
+
+Preparado para futura integración con Firebase o bases de datos reales.
+
+Todo debe ser 100% responsive y escalable.

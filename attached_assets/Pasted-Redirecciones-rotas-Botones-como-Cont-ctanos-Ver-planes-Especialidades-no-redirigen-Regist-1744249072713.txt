@@ -1,0 +1,88 @@
+Redirecciones rotas
+
+Botones como “Contáctanos”, “Ver planes”, “Especialidades” no redirigen
+
+Registro no direcciona correctamente después del login
+
+Módulo de pagos
+
+No se encontró integración real para procesar el pago después del registro
+
+Módulo de chat
+
+Está solicitado, pero no está implementado
+
+Necesitamos crear los componentes e integrar en dashboard
+
+Verificación de contacto con médicos de amigos
+
+No se ha trabajado la lógica para importar contactos del teléfono o redes
+
+Falta red social médica y recomendaciones
+
+Diagnóstico por IA
+
+No se ha integrado ningún motor de IA ni lógica de sugerencias diagnósticas
+
+Atención recurrente y seguimiento
+
+No se implementó el sistema de notificación o citas recurrentes
+
+Tampoco seguimiento automatizado para enfermedades crónicas
+
+Lista de especialidades
+
+Falta completar la lista en el frontend
+
+Algunas no se visualizan correctamente en el menú desplegable
+
+Carga de fotos
+
+Error al subir imagen de perfil o visualizarla desde el panel
+
+Expediente clínico:
+
+Falta validar si cumple visualmente y funcionalmente con COFEPRIS
+
+Aún no hay ejemplos de campos clínicos llenados ni reportes
+
+Personalización por ciudad
+
+Actualmente no filtra por ciudad (solo pondremos Guadalajara por ahora)
+
+Animaciones e imágenes
+
+Varias imágenes rotas en home y módulos
+
+Faltan animaciones representativas en “Sobre Nosotros” y Labs
+
+Configuración
+
+Panel de configuración no muestra opciones (vacío)
+
+Módulo de agendamiento
+
+Falta la parte completa para reservar citas directo con médicos filtrados
+
+🔧 PRIORIDADES PARA LA SIGUIENTE FASE
+Corregir navegación
+
+Completar catálogo de laboratorios (PDF o base de datos COFEPRIS)
+
+Incluir animaciones e imágenes rotas
+
+Desplegar especialidades y permitir agendar citas
+
+Integrar chat
+
+Agregar lógica de IA para diagnóstico
+
+Verificación cruzada con contactos (versión básica)
+
+Activar pagos por suscripción
+
+Implementar lógica de consultas recurrentes
+
+Panel de configuración activo
+
+Correcciones legales con redirección funcional

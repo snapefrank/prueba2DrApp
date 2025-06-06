@@ -1,0 +1,68 @@
+🛠️ INSTRUCCIONES PARA MEJORAR MEDICONNECT (basado en AttachmentManager original)
+
+🔧 CORRECCIÓN DE ERRORES DETECTADOS:
+1. Revisar y corregir redirecciones rotas: al hacer click en ítems del menú (como Especialidades, ¿Cómo funciona? y Precios) no redirecciona correctamente.
+2. Iconos e imágenes deben cargarse de forma consistente en todos los dispositivos (revisar rutas estáticas).
+3. Validar que los formularios funcionen correctamente en todos los roles (paciente y médico).
+4. Corregir los enlaces internos en el navbar y sidebar para que naveguen sin errores.
+5. Optimizar la carga de componentes para evitar renderizados incompletos o en blanco.
+
+🧩 NUEVAS FUNCIONES A IMPLEMENTAR:
+
+📅 Citas Recurrentes:
+- Agregar módulo que permita a los médicos programar citas automáticas para seguimiento de enfermedades crónicas.
+- Incluir recordatorios al paciente y alertas en el dashboard del médico.
+
+📌 Atención Personalizada Programada:
+- Crear bloque que permita programar chequeos integrales con frecuencia establecida (trimestral, anual).
+- Mostrar en el historial y con alertas previas.
+
+🔁 Referencias dentro de MediConnect:
+- Permitir que los médicos puedan derivar pacientes a otros especialistas dentro de la app.
+- Registrar esta referencia en el expediente.
+- Mostrar quién derivó y permitir compartir historial si el paciente lo autoriza.
+
+🤖 Inteligencia Artificial Clínica:
+- La IA analiza síntomas, exploración, antecedentes y resultados durante la consulta.
+- En la sección de recetas, sugerirá un diagnóstico presuntivo con razonamiento clínico.
+- Podrá sugerir medicamentos base de acuerdo con guías clínicas.
+- IA se adapta por especialidad y estilo de cada médico.
+
+👥 Red social médica del paciente:
+- Permitir login con teléfono, Google o Facebook para conectar contactos.
+- Mostrar médicos visitados o recomendados por amigos (con autorización).
+- Permitir dejar recomendaciones visibles públicamente o solo a contactos.
+- Mostrar sugerencias tipo: “3 de tus amigos visitan al Dr. X”.
+- Permitir navegación anónima manteniendo recomendaciones de red.
+
+🧾 Validación de Médicos:
+- Carga obligatoria de cédula profesional, especialidad, CV y foto profesional.
+- Crear panel para analistas que verifiquen los documentos antes de mostrar al médico públicamente.
+
+📋 Recetas electrónicas (COFEPRIS 2025):
+- Generación de receta con campos legales: nombre, cédula, domicilio del médico.
+- Autocompletado de medicamentos de lista oficial.
+- Exportación como PDF.
+
+🧪 Laboratorios:
+- Panel para crear órdenes de laboratorio por parte del médico.
+- Integración para recibir PDF del laboratorio o link directo a sus resultados.
+- El paciente también puede subir resultados.
+- Descuentos se habilitarán una vez que existan convenios con laboratorios (no activos aún).
+
+💳 Precios y planes:
+- El modelo de cobro es por **suscripción**, no por consulta.
+- Cada plan incluye cierto número de consultas. Excedente se cobra con tarifa preferencial.
+- Al médico se le podrá descontar hasta un 20% por cada consulta según el plan futuro.
+
+🌐 Secciones públicas activas:
+- Especialidades: cargar top 10 más buscadas en México según datos de 2025.
+- ¿Cómo funciona?: mostrar flujo completo desde registro hasta atención y seguimiento.
+- Precios: explicar planes, lógica de descuentos, y beneficios de la suscripción.
+
+🗂️ Expediente Clínico:
+- Visualización de: recetas, citas recurrentes, referencias, IA diagnóstica, laboratorio y observaciones en una línea de tiempo clara y ordenada.
+
+🎯 Enfocarse en: modularidad, privacidad, validación de datos, UX limpia y optimizada.
+
+🚨 IMPORTANTE: No avanzar en otras etapas hasta que las redirecciones de navegación estén corregidas y el dashboard cargue bien todos los módulos.

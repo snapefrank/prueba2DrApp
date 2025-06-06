@@ -1,0 +1,107 @@
+✅ 1. Menú desplegable completo de especialidades
+Implementar un listado visual y ordenado de especialidades médicas y de la salud, cada una con su ícono representativo y clasificación clara. Incluir las siguientes categorías:
+
+Ginecología
+
+Psicología
+
+Dermatología
+
+Oftalmología
+
+Urología
+
+Ortopedia
+
+Otorrinolaringología
+
+Nutrición
+
+Odontología
+
+Medicina General
+
+Medicina Interna
+
+Psiquiatría
+
+Pediatría
+
+Endocrinología
+
+Cardiología
+
+Gastroenterología
+
+Rehabilitación
+
+Terapia del Lenguaje
+
+Cirugía Plástica
+
+Neurología
+
+Traumatología
+
+Fisioterapia
+
+Medicina Estética
+
+Homeopatía
+
+📌 Las especialidades deben estar basadas en catálogos oficiales validados por la Dirección General de Profesiones y COFEPRIS.
+
+✅ 2. Buscador inteligente
+Agregar una barra de búsqueda funcional que permita al usuario escribir:
+
+Especialidad
+
+Nombre del profesional de salud
+
+Síntoma o condición médica
+
+Se deben desplegar sugerencias en tiempo real mientras el usuario escribe.
+
+✅ 3. Filtro de modalidad y ciudad (fase 1)
+Por ahora, incluir únicamente:
+
+Modalidad: ✅ Visita presencial / ✅ En línea
+
+Ciudad: ✅ Guadalajara (única ciudad habilitada de momento)
+
+✅ 4. Resultados visuales y funcionales
+Al seleccionar una especialidad, deben mostrarse los médicos disponibles que estén correctamente registrados y validados, incluyendo:
+
+Foto de perfil
+
+Nombre completo
+
+Especialidad
+
+Localización (Guadalajara)
+
+Botones: “Ver perfil” y “Agendar cita”
+
+📌 Importante: Nada debe quedar en blanco. Si no hay médicos registrados para una categoría, mostrar mensaje claro:
+
+"Actualmente no hay especialistas disponibles en esta categoría. Pronto se agregarán más médicos."
+
+✅ 5. Diseño profesional, moderno y responsivo
+El buscador y menú de especialidades deben:
+
+Cargar de forma rápida
+
+Verse bien en celular, computadora y tablet
+
+Evitar errores 404 o íconos rotos
+
+Mostrar siempre imágenes y especialidades completas
+
+✅ 6. Preparado para futuras integraciones sociales
+El sistema debe quedar listo para integrar en siguientes fases:
+
+Contactos del teléfono (opcional, con consentimiento del usuario)
+
+Sugerencias basadas en médicos que atienden a amigos del usuario
+
+Visualización anónima o con control de privacidad activado

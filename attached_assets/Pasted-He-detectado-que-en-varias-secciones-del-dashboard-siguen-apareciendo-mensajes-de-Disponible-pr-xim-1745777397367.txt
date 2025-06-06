@@ -1,0 +1,91 @@
+He detectado que en varias secciones del dashboard siguen apareciendo mensajes de “Disponible próximamente” o solo placeholders. Necesitamos que todas las vistas estén completamente llenas de información real y que cada flujo sea lógico y operativo. Por favor, corrige lo siguiente en orden:
+
+1. Eliminar todos los placeholders “Próximamente”
+Busca en cada componente de página (Pacientes, Agenda, Recetas, Laboratorio, Expedientes, Consulta, Tareas, Mensajes, Perfil, Configuración) cualquier texto o banner “Disponible próximamente” y elimínalo.
+
+Reemplázalo por el contenido dinámico que corresponda o, de no estar listo, por un componente mínimo que muestre datos de prueba lógicos (ej. cabecera con título y un listado fake de ejemplo).
+
+2. Llenar cada sección con contenido real o mock lógico
+Pacientes
+
+Mostrar la lista de pacientes traídos de la API.
+
+Cada fila debe incluir: nombre, edad, fecha última cita y botón “Ver detalle”.
+
+Agenda
+
+Mostrar calendario con días con citas.
+
+Al hacer clic en un día, listar esas citas con hora y paciente.
+
+Botón “Agregar horario” que abra un modal funcional.
+
+Recetas
+
+Mostrar todas las recetas emitidas: fecha, paciente, estado.
+
+Botón “Crear receta” completamente operativo.
+
+Laboratorio
+
+Listado de órdenes recibidas: paciente, tipo de examen, estado.
+
+Botón “Subir resultados” que abra un componente de carga de archivo.
+
+Expedientes
+
+Historial clínico filtrable: paciente, fecha, tipo de expediente.
+
+Cada entrada debe poder abrir el detalle.
+
+Consulta
+
+Mostrar la lista de consultas activas y pasadas.
+
+Al seleccionar, permitir agregar notas y guardar cambios.
+
+Tareas
+
+Listado de tareas con checkbox funcional para marcar completadas.
+
+Form para crear nueva tarea y agregarla a la lista.
+
+Mensajes
+
+Lista de conversaciones con avatar y última fecha de mensaje.
+
+Al abrir, mostrar el hilo de chat y campo para enviar mensaje nuevo.
+
+Perfil
+
+Mostrar datos del médico: nombre, cédula, especialidad, foto.
+
+Botón “Editar” que abra un formulario con sus datos rellenados.
+
+Configuración
+
+Formulario para cambiar contraseña.
+
+Sección de preferencias (por ejemplo notificaciones por email).
+
+Dashboard Home
+
+Tarjetas de KPIs (nº pacientes, citas de hoy).
+
+Tabla de próximas 5 citas con hora y paciente.
+
+3. Asegurar lógica y consistencia
+Datos reales: Cada sección debe obtener datos mediante su petición API correspondiente.
+
+Estados de carga: Mientras se carga, mostrar skeletons o loaders.
+
+Estados de error: Si la API falla, mostrar mensaje de error claro (“No se pudo cargar la lista de pacientes”).
+
+Sin pantallas vacías: Ninguna ruta debe quedar en blanco o 404; al menos el componente de “No hay datos disponibles” si realmente no hay registros.
+
+4. Pruebas de usuario
+Navegar a cada enlace del sidebar y verificar que algo (aunque sea datos de prueba) se muestre inmediatamente.
+
+Confirmar que no haya textos “Próximamente” ni rutas que devuelvan 404.
+
+Probar interacciones básicas: clic en “Ver detalle”, “Crear nueva”, “Guardar”, “Enviar mensaje”, etc., y asegurarse de que el componente correspondiente responda.

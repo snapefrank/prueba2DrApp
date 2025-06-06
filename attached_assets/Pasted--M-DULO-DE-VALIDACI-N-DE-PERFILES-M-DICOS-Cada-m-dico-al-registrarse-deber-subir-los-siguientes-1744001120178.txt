@@ -1,0 +1,175 @@
+🔐 MÓDULO DE VALIDACIÓN DE PERFILES MÉDICOS
+Cada médico, al registrarse, deberá subir los siguientes documentos desde su perfil:
+
+✅ Cédula profesional (obligatoria)
+
+✅ Constancia de especialidad avalada por institución (obligatoria si aplica)
+
+✅ Foto de perfil profesional (obligatoria)
+
+🟡 Diplomados o cursos relevantes (opcional)
+
+🟡 Currículum en PDF (opcional)
+
+Los documentos serán validados por el equipo interno de analistas antes de hacer visible el perfil del médico.
+
+Si no se validan correctamente:
+
+El médico no podrá aparecer públicamente en la plataforma.
+
+En su panel verá el mensaje:
+“Tu perfil está pendiente de validación por el equipo de MediConnect. Recibirás una notificación al ser aprobado.”
+
+Se debe crear un panel para analistas, donde puedan:
+
+Ver todos los médicos pendientes
+
+Revisar documentos
+
+Aprobar o rechazar con comentarios
+
+💊 MÓDULO DE RECETAS ELECTRÓNICAS (PDF) – COFEPRIS 2025
+El médico podrá generar recetas desde su panel.
+
+El formulario de receta debe incluir:
+
+Nombre completo del paciente
+
+Fecha
+
+Medicamentos (validados por COFEPRIS)
+
+Dosis
+
+Frecuencia
+
+Instrucciones
+
+Dirección del médico o consultorio (requisito COFEPRIS)
+
+Firma digital o nombre del médico
+
+Implementar autocompletado de medicamentos con base en un archivo .json o base de datos local con medicamentos autorizados por COFEPRIS 2025.
+
+Las recetas serán generadas en PDF profesional, listo para imprimir o enviar.
+
+🧪 MÓDULO DE ORDENES Y RESULTADOS DE LABORATORIO
+El médico puede generar órdenes desde su panel.
+
+Los resultados pueden ser subidos por:
+
+El laboratorio (desde su acceso)
+
+El paciente (en PDF o link a resultados)
+
+Formatos permitidos:
+
+PDF
+
+Enlace seguro
+
+Los resultados se vinculan al expediente del paciente y pueden ser revisados por el médico tratante.
+
+Descuentos no se aplican todavía, hasta firmar convenios oficiales.
+
+Laboratorios objetivo:
+
+UPC, Chopo, Salud Digna
+
+Laboratorios pequeños interesados en captación de pacientes
+
+📂 PÁGINAS PÚBLICAS – CONTENIDO
+🔸 Especialidades
+Tarjetas visuales con las 10 especialidades más buscadas en México.
+Ejemplos:
+
+Ginecología
+
+Pediatría
+
+Psicología
+
+Medicina General
+
+Dermatología
+
+Nutrición
+
+Urología
+
+Traumatología
+
+Otorrinolaringología
+
+Medicina Interna
+
+Cada tarjeta redirige a /especialidades/[nombre].
+
+🔸 ¿Cómo funciona?
+Pacientes:
+
+Registro
+
+Selección de plan de suscripción
+
+Agendamiento
+
+Consultas, recetas, órdenes
+
+Subida y revisión de resultados
+
+Consultas adicionales con costo preferencial si se sobrepasa el límite del plan
+
+Médicos:
+
+Registro y envío de documentos
+
+Validación
+
+Panel médico completo
+
+Agenda, expediente, recetas, órdenes
+
+Comisión variable por consulta (hasta 20%, ajustable según plan)
+
+Laboratorios:
+
+Registro como laboratorio aliado
+
+Recepción de órdenes
+
+Subida de resultados
+
+Visibilidad ante médicos y pacientes
+
+🔸 Precios
+Pacientes:
+
+Suscripción mensual o anual
+
+Incluye cierto número de consultas
+
+Costo adicional con tarifa preferencial si se excede
+
+Acceso a expediente, recetas, órdenes y beneficios futuros
+
+Médicos:
+
+Modelo de suscripción mensual o anual
+
+Acceso completo a herramientas y pacientes
+
+Comisión por consulta (hasta 20%, a definir por plan)
+
+Modelo escalable sin pagos por cada cita individual
+
+⚖️ SECCIÓN LEGAL
+Footer con accesos a:
+
+Términos y condiciones
+
+Aviso de privacidad
+
+Políticas de uso
+
+Cada documento debe tener su propia página con scroll y contenido adaptado de los modelos legales aprobados.

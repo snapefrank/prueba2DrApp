@@ -1,0 +1,189 @@
+OBJETIVOS DEL PROMPT
+
+1. Corregir la navegación principal (`App.jsx`) para incluir rutas reales y funcionales.
+2. Implementar lógica de login simulada con `localStorage`.
+3. Crear componentes de rutas protegidas por rol (`PrivateRoute.jsx`).
+4. Separar correctamente la experiencia de cada usuario.
+5. Establecer un sistema mínimo de validación de formularios para login y registro.
+
+---
+
+## 📦 ESTRUCTURA BASE DE CARPETAS (A CORREGIR Y COMPLETAR)
+
+```bash
+/src
+├── App.jsx
+├── context/
+│   └── AuthContext.jsx
+├── components/
+│   ├── PrivateRoute.jsx
+│   ├── Navbar.jsx
+│   ├── SidebarPaciente.jsx
+│   ├── SidebarMedico.jsx
+│   └── SidebarAdmin.jsx
+├── pages/
+│   ├── Login.jsx
+│   ├── Register.jsx
+│   ├── DashboardPaciente.jsx
+│   ├── DashboardMedico.jsx
+│   ├── DashboardAdmin.jsx
+│   ├── NotFound.jsx
+│   └── NotAuthorized.jsx
+```
+
+---
+
+## 🔄 1. APP.JSX — Reconstrucción de Rutas Reales
+
+El archivo `App.jsx` debe contener las rutas claramente mapeadas con componentes funcionales.
+
+### Correcciones Clave:
+- Eliminar rutas a componentes inexistentes.
+- Agregar `Route` con `element={<PrivateRoute role="..." />}` para proteger el acceso según el rol del usuario.
+- Agregar una ruta fallback (`*`) para evitar errores 404 que cuelguen la app.
+
+```jsx
+<Routes>
+  <Route path="/" element={<Login />} />
+  <Route path="/registro" element={<Register />} />
+  <Route path="/paciente" element={<PrivateRoute role="paciente"><DashboardPaciente /></PrivateRoute>} />
+  <Route path="/medico" element={<PrivateRoute role="medico"><DashboardMedico /></PrivateRoute>} />
+  <Route path="/admin" element={<PrivateRoute role="admin"><DashboardAdmin /></PrivateRoute>} />
+  <Route path="/not-authorized" element={<NotAuthorized />} />
+  <Route path="*" element={<NotFound />} />
+</Routes>
+```
+
+---
+
+## 🔐 2. RUTAS PROTEGIDAS — PrivateRoute.jsx
+
+Componente que verifica si el usuario tiene sesión activa y si el rol coincide con la ruta que intenta acceder.
+
+```jsx
+import { useContext } from 'react';
+import { Navigate } from 'react-router-dom';
+import { AuthContext } from '../context/AuthContext';
+
+const PrivateRoute = ({ children, role }) => {
+  const { user } = useContext(AuthContext);
+
+  if (!user) return <Navigate to="/" />;
+  if (role && user.role !== role) return <Navigate to="/not-authorized" />;
+
+  return children;
+};
+
+export default PrivateRoute;
+```
+
+---
+
+## 🧠 3. CONTEXTO DE AUTENTICACIÓN — AuthContext.jsx
+
+Se crea un contexto global para guardar el estado del usuario autenticado:
+
+```jsx
+import { createContext, useState, useEffect } from 'react';
+
+export const AuthContext = createContext();
+
+export const AuthProvider = ({ children }) => {
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    const savedUser = localStorage.getItem("mediUser");
+    if (savedUser) setUser(JSON.parse(savedUser));
+  }, []);
+
+  const login = (data) => {
+    localStorage.setItem("mediUser", JSON.stringify(data));
+    setUser(data);
+  };
+
+  const logout = () => {
+    localStorage.removeItem("mediUser");
+    setUser(null);
+  };
+
+  return (
+    <AuthContext.Provider value={{ user, login, logout }}>
+      {children}
+    </AuthContext.Provider>
+  );
+};
+```
+
+**Uso en index.jsx:**
+```jsx
+<AuthProvider>
+  <BrowserRouter>
+    <App />
+  </BrowserRouter>
+</AuthProvider>
+```
+
+---
+
+## 🔐 4. LOGIN CON LÓGICA FUNCIONAL
+
+Corregir `Login.jsx` para que valide campos e inicie sesión simulando credenciales:
+
+```jsx
+const handleLogin = () => {
+  if (email === '' || password === '') return alert('Todos los campos son obligatorios');
+
+  // Simulamos login (esto debe ir a backend luego)
+  if (email === 'paciente@test.com') {
+    login({ role: 'paciente', name: 'Paciente Ejemplo' });
+    navigate('/paciente');
+  } else if (email === 'medico@test.com') {
+    login({ role: 'medico', name: 'Dr. Ejemplo' });
+    navigate('/medico');
+  } else if (email === 'admin@test.com') {
+    login({ role: 'admin', name: 'Admin Ejemplo' });
+    navigate('/admin');
+  } else {
+    alert('Usuario no encontrado');
+  }
+};
+```
+
+---
+
+## 🔧 5. COMPONENTES DE INTERFAZ DINÁMICA
+
+### Navbar.jsx
+Debe cambiar dinámicamente si el usuario está logueado o no:
+
+```jsx
+{user ? (
+  <>
+    <span>Bienvenido, {user.name}</span>
+    <button onClick={logout}>Cerrar sesión</button>
+  </>
+) : (
+  <Link to="/">Iniciar sesión</Link>
+)}
+```
+
+### SidebarPaciente / SidebarMedico / SidebarAdmin
+Cada uno debe contener enlaces válidos al dashboard y otras secciones.
+
+---
+
+## ⚠️ 6. PÁGINAS DE ERROR
+
+### NotFound.jsx
+```jsx
+<h1>404 — Página no encontrada</h1>
+<Link to="/">Ir al inicio</Link>
+```
+
+### NotAuthorized.jsx
+```jsx
+<h1>Acceso no autorizado</h1>
+<Link to="/">Iniciar sesión con otro usuario</Link>
+```
+
+---

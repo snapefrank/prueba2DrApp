@@ -1,0 +1,96 @@
+ Corrección de subdominios forzados y navegación inteligente según el rol
+yaml
+Copiar
+Editar
+Vamos a corregir la redirección errónea que fuerza siempre el subdominio "doctor" al iniciar la app MediConnect. El objetivo de este bloque es asegurar que:
+
+1. El usuario sea redirigido al subdominio correcto según su rol (paciente, médico, admin, laboratorio).
+2. No se fuerce ningún subdominio por defecto al cargar la página.
+3. Se elimine cualquier lógica de fallback que siempre dirija al portal de médicos.
+4. La navegación y autenticación funcionen correctamente desde la página principal (`www.dominio.com`) y desde cada subdominio (ej. `doctor.dominio.com`).
+
+---
+
+🔒 SEGURIDAD Y AUTENTICACIÓN
+
+🔹 Asegúrate de que al hacer login, se guarde correctamente en `localStorage` el rol del usuario (`role: doctor | patient | admin | lab`).
+
+🔹 Usa `AuthContext` o el contexto de sesión para acceder al rol en cualquier punto de la aplicación.
+
+🔹 Crea una función central llamada `redirectToRoleSubdomain(role)` que haga lo siguiente:
+
+```js
+function redirectToRoleSubdomain(role) {
+  const subdomains = {
+    doctor: 'doctor.dominio.com',
+    patient: 'patient.dominio.com',
+    admin: 'admin.dominio.com',
+    lab: 'lab.dominio.com'
+  };
+  const url = subdomains[role] || 'www.dominio.com';
+  window.location.replace(`https://${url}`);
+}
+🛠️ Si estás en modo local con Replit, usa rutas tipo ?subdomain=doctor para simular el entorno y adapta redirectToRoleSubdomain a reconocer y validar esa variable.
+
+🌐 SUBDOMINIOS INTELIGENTES Y CONTEXTO
+
+🔹 Asegúrate de que App.jsx (o App.tsx) tenga un hook como este para detectar en qué subdominio estás y evitar conflicto:
+
+js
+Copiar
+Editar
+function getCurrentSubdomain() {
+  const host = window.location.hostname;
+  const parts = host.split('.');
+  if (host.includes('replit.dev')) {
+    const query = new URLSearchParams(window.location.search);
+    return query.get('subdomain') || 'public';
+  }
+  return parts.length > 2 ? parts[0] : 'public';
+}
+🔹 Usa esta función para determinar qué DashboardLayout o LoginRoute cargar. Si el subdominio es incorrecto para el rol actual, redirígelo con redirectToRoleSubdomain().
+
+📦 RUTAS ESTRUCTURADAS
+
+🔹 En tu archivo de rutas (AppRoutes.jsx o similar), crea rutas protegidas por rol:
+
+jsx
+Copiar
+Editar
+<Route path="/dashboard" element={<RoleProtectedRoute role="doctor"><DoctorDashboard /></RoleProtectedRoute>} />
+<Route path="/dashboard" element={<RoleProtectedRoute role="patient"><PatientDashboard /></RoleProtectedRoute>} />
+<Route path="/dashboard" element={<RoleProtectedRoute role="admin"><AdminDashboard /></RoleProtectedRoute>} />
+🔹 En el componente <RoleProtectedRoute />, valida que el subdominio actual sea el correcto. Si no lo es, redirige automáticamente con:
+
+js
+Copiar
+Editar
+useEffect(() => {
+  if (getCurrentSubdomain() !== role) {
+    redirectToRoleSubdomain(role);
+  }
+}, []);
+📍 DETECCIÓN CORRECTA EN index.html O ROOT
+
+🔹 En index.html o index.js, verifica si el usuario ya está autenticado y tiene rol guardado. Si lo tiene, llama a redirectToRoleSubdomain(role) directamente para mandarlo al lugar correcto sin errores ni fallback al subdominio "doctor".
+
+🚨 ELIMINAR COMPORTAMIENTO DEFECTUOSO
+
+🔹 Revisa si en algún archivo tienes líneas como:
+
+js
+Copiar
+Editar
+window.location.replace("?subdomain=doctor");
+o similares. Deben ser eliminadas o reemplazadas por redirectToRoleSubdomain() correctamente parametrizada.
+
+🧪 TESTING
+
+🔸 Usa sesiones de prueba con diferentes correos (admin@, doctor@, paciente@) para validar que:
+
+Desde la página principal, al hacer login, el usuario sea redirigido correctamente según su rol.
+
+Al escribir mal un subdominio, el sistema no caiga en emergencia sino que muestre error o redireccione.
+
+Las sesiones se mantengan estables al navegar entre páginas del mismo subdominio.
+

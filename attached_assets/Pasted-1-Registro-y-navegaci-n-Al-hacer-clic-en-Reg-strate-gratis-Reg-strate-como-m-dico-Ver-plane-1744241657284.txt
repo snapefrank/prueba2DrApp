@@ -1,0 +1,80 @@
+1. Registro y navegación:
+Al hacer clic en "Regístrate gratis", "Regístrate como médico", "Ver planes" o "Contactar ventas", deben redirigir correctamente.
+
+El botón “Contactar ventas” debe abrir un formulario con: nombre, correo, teléfono, y puesto.
+
+Si ya estás registrado y eliges un plan, debe redirigir directamente al método de pago, con el monto correcto del plan.
+
+Al cerrar sesión, debe recargarse la página y llevarte al inicio.
+
+Al iniciar sesión como paciente, debe mostrar la lista de especialistas disponibles con opción para reservar cita.
+
+En el menú derecho, debe aparecer la foto de perfil en miniatura (ya sea médico o paciente).
+
+Al cambiar la foto de perfil, debe permitir ver la foto actual y seleccionar nueva.
+
+2. Catálogo y animaciones:
+El catálogo de laboratorios no abre. Debe integrarse con base en la lista oficial de estudios autorizados por COFEPRIS 2025, tanto de laboratorio como de imagen.
+
+En “Laboratorios y clínicas” colocar animaciones ilustrativas o ejemplos visuales de cómo se verá una clínica o laboratorio modelo si aún no hay laboratorios activos.
+
+3. Inicio, imágenes y precios:
+Varias imágenes están rotas o no cargan (inicio, agendar cita, etc). Sustituir por imágenes correctas, profesionales.
+
+Ningún plan debe estar en $0. Actualizar con los precios reales definidos por suscripción.
+
+Al registrar médicos, se necesita un menú desplegable que permita seleccionar si es médico, psicólogo, dentista, etc., y mostrar la especialidad correspondiente.
+
+4. Expediente clínico y funciones inteligentes:
+El expediente debe permitir subir fotografías sin errores.
+
+Incluir un módulo de IA que ayude a proporcionar un diagnóstico presuntivo, explicando su razonamiento con base en la sintomatología y exploración registrada por el médico.
+
+Tomar como base el sistema de Doctoralia y expedienteclinico.mx, pero con una experiencia más clara y visual.
+
+5. Funciones extra:
+Agregar funciones de:
+
+Citas recurrentes automáticas.
+
+Alertas para atención periódica con el mismo médico.
+
+Sistema de referencias internas entre médicos y especialidades.
+
+Red social médica: permitir importar contactos del teléfono o redes sociales (como Facebook) para compartir doctores recomendados por amigos, con opción de anonimato.
+
+Sistema de reseñas que destaque si un amigo tuyo consulta con ese médico (solo si el usuario lo permite).
+
+6. Recursos, “Sobre Nosotros” y Sección Legal:
+Los enlaces de "Recursos" están rotos. Reparar todos.
+
+En “Sobre nosotros”, escribir contenido real que refleje:
+
+Qué es MediConnect
+
+Nuestra misión: conectar salud, confianza y tecnología
+
+Visión: una plataforma de salud integral confiable
+
+En la sección Legal, se debe enlazar a una página externa con:
+
+Términos y condiciones completos (ya redactados)
+
+Política de privacidad
+
+Aviso de cookies
+
+El usuario debe aceptar los términos y condiciones al registrarse (checkbox obligatorio).
+
+7. Errores actuales que deben corregirse:
+No carga el dashboard automáticamente tras iniciar sesión.
+
+En “Configuración” no aparece nada, debe mostrar opciones de perfil.
+
+En “Resultados de laboratorio” no se muestra ningún archivo, debe poder verse el PDF o link subido por el laboratorio o paciente.
+
+En la sección inferior de laboratorios, hay enlaces 404. Quitar todo lo que no funcione o esté roto.
+
+El módulo de “laboratoriales” deberá implementarse con una vista personalizada basada en el esquema enviado en imagen.
+
+Revisar el sistema de imagen de portada en el inicio que no está cargando adecuadamente.

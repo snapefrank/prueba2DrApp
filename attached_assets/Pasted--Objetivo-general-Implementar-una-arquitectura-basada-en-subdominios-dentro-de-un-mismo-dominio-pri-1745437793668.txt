@@ -1,0 +1,101 @@
+ Objetivo general: Implementar una arquitectura basada en subdominios dentro de un mismo dominio principal (mediconnect.mx), segmentando la plataforma por tipo de usuario para mejorar escalabilidad, claridad, seguridad y experiencia.
+
+🧩 Subdominios requeridos:
+www.mediconnect.mx
+
+Página pública principal.
+
+Incluye: Home, Precios, Cómo funciona, Registro, Footer legal, Sobre Nosotros, Contactar Ventas.
+
+Redirecciona a otros subdominios según el rol elegido.
+
+medicos.mediconnect.mx
+
+Dashboard para médicos validados.
+
+Funciones:
+
+Ver agenda y consultas programadas.
+
+Generar recetas (con requisitos COFEPRIS 2025).
+
+Ordenar estudios de laboratorio.
+
+Subir foto de perfil, diplomas, especialidad y cédula profesional.
+
+Acceso a IA diagnóstica según exploración/expediente.
+
+Visualización de historial médico por paciente.
+
+Acceso al chat con pacientes solo después de una consulta agendada y realizada.
+
+pacientes.mediconnect.mx
+
+Panel exclusivo para pacientes registrados.
+
+Funciones:
+
+Buscar médicos y especialidades (más de 100 tipos).
+
+Reservar citas filtradas por ciudad (inicialmente solo Guadalajara).
+
+Subir resultados de laboratorio (PDF o enlaces).
+
+Consultar historial de consultas y documentos.
+
+Acceder al chat con su médico una vez terminada la consulta.
+
+Compartir médicos con contactos (opcional, vía integración con contactos telefónicos o Facebook).
+
+labs.mediconnect.mx
+
+Portal para laboratorios con convenio.
+
+Funciones:
+
+Subir resultados de estudios ordenados por los médicos.
+
+Acceso a ordenes pendientes, completadas, canceladas.
+
+Subir resultados en PDF o por integración con base de datos.
+
+Visualizar descuentos activos.
+
+Opción para que el laboratorio gestione convenios con la plataforma.
+
+admin.mediconnect.mx (opcional, solo para equipo interno)
+
+Panel de control para administradores.
+
+Funciones:
+
+Validación de perfiles médicos.
+
+Control de suscripciones.
+
+Métricas generales del sistema.
+
+Gestión de contenido e incidencias.
+
+🔐 Consideraciones técnicas:
+Todos los subdominios deben usar HTTPS.
+
+Las cookies de autenticación deben estar configuradas con SameSite=None; Secure; Path=/.
+
+Las sesiones deben mantenerse de forma independiente por subdominio.
+
+El sistema debe redireccionar automáticamente al dashboard correcto después del login según el rol:
+
+Si inicia como médico → medicos.mediconnect.mx
+
+Si inicia como paciente → pacientes.mediconnect.mx
+
+Si inicia como laboratorio → labs.mediconnect.mx
+
+🎯 Funcionalidades clave a implementar por subdominio:
+✅ Manejo de rutas internas exclusivo por subdominio.
+✅ Layouts distintos por tipo de usuario.
+✅ Autenticación diferenciada y segura por tipo de cuenta.
+✅ Redirección clara desde www.mediconnect.mx al subdominio correspondiente.
+✅ Validación dinámica del rol del usuario.
+✅ Evitar el uso de rutas protegidas compartidas entre role

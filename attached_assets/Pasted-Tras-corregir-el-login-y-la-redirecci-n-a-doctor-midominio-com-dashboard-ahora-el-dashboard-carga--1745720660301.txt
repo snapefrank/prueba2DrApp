@@ -1,0 +1,74 @@
+Tras corregir el login y la redirección a doctor.midominio.com/dashboard, ahora el dashboard carga, pero ninguno de los enlaces del sidebar (Pacientes, Agenda, Recetas, etc.) está definido en el router, por eso React Router cae siempre en la ruta “Not Found” y muestra el 404 “Did you forget to add the page to the router?”.
+
+Por favor, revisa e implementa lo siguiente en tu configuración de rutas (por ejemplo en App.tsx o donde tengas el <BrowserRouter>):
+
+tsx
+Copiar
+Editar
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import DashboardLayout from './layouts/DashboardLayout';
+import DashboardHome from './pages/DashboardHome';
+import PacientesPage from './pages/PacientesPage';
+import AgendaPage from './pages/AgendaPage';
+import RecetasPage from './pages/RecetasPage';
+import LaboratorioPage from './pages/LaboratorioPage';
+import ExpedientesPage from './pages/ExpedientesPage';
+import ConsultaPage from './pages/ConsultaPage';
+import TareasPage from './pages/TareasPage';
+import MensajesPage from './pages/MensajesPage';
+import NotFound from './components/NotFound';
+
+function AppRouter() {
+  return (
+    <BrowserRouter>
+      <Routes>
+        {/* Ruta base de dashboard anidada */}
+        <Route path="/dashboard" element={<DashboardLayout />}>
+          {/* Vista principal */}
+          <Route index element={<DashboardHome />} />
+
+          {/* Aquí definimos cada enlace del sidebar */}
+          <Route path="pacientes" element={<PacientesPage />} />
+          <Route path="agenda" element={<AgendaPage />} />
+          <Route path="recetas" element={<RecetasPage />} />
+          <Route path="laboratorio" element={<LaboratorioPage />} />
+          <Route path="expedientes" element={<ExpedientesPage />} />
+          <Route path="consulta" element={<ConsultaPage />} />
+          <Route path="tareas" element={<TareasPage />} />
+          <Route path="mensajes" element={<MensajesPage />} />
+
+          {/* Cualquier otra ruta dentro del dashboard */}
+          <Route path="*" element={<NotFound />} />
+        </Route>
+
+        {/* Redireccionar raíz / a /dashboard */}
+        <Route path="/" element={<Navigate to="/dashboard" replace />} />
+
+        {/* Páginas fuera del dashboard (login, register, etc.) */}
+        {/* <Route path="/login" element={<Login />} /> */}
+        {/* … */}
+        
+        {/* Ruta catch-all fuera del dashboard */}
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+    </BrowserRouter>
+  );
+}
+
+export default AppRouter;
+Adicionalmente:
+
+Verifica los to de tus links en el sidebar. Ejemplo en tu DashboardLayout o Sidebar:
+
+tsx
+Copiar
+Editar
+<Link to="/dashboard/pacientes">Pacientes</Link>
+<Link to="/dashboard/agenda">Agenda</Link>
+<Link to="/dashboard/recetas">Recetas</Link>
+// … y así con cada sección
+Comprueba que cada uno de esos componentes (PacientesPage, AgendaPage, etc.) exista y esté exportado correctamente.
+
+Si usas parámetros de subdominio en query (?subdomain=doctor), asegúrate de que no interfiera con la ruta base. Lo ideal es que React Router sólo vea el path /dashboard/..., y toda la lógica de subdominios se maneje antes (en el login/redirección), no dentro del router.
+
+Fallback en el servidor: recuerda que el servidor debe devolver siempre index.html para cualquier ruta que empiece con /dashboard, para que React Router maneje el enrutado del cliente.

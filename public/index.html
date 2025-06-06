@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MediConnect - Plataforma Médica</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        header {
+            background-color: #0077b6;
+            color: white;
+            padding: 1rem 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        .nav-links {
+            display: flex;
+            gap: 20px;
+        }
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        .nav-links a:hover {
+            color: #caf0f8;
+        }
+        .hero {
+            background-color: #0077b6;
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto 2rem;
+        }
+        .btn {
+            display: inline-block;
+            background-color: #00b4d8;
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+        .btn:hover {
+            background-color: #0096c7;
+        }
+        .features {
+            padding: 4rem 2rem;
+            background-color: white;
+        }
+        .features h2 {
+            text-align: center;
+            margin-bottom: 3rem;
+            color: #0077b6;
+        }
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        .feature-card {
+            background-color: #f8f9fa;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        .feature-card h3 {
+            color: #0077b6;
+            margin-top: 0;
+        }
+        footer {
+            background-color: #023e8a;
+            color: white;
+            padding: 2rem;
+            text-align: center;
+        }
+        .api-status {
+            margin-top: 2rem;
+            padding: 1rem;
+            background-color: #f0f0f0;
+            border-radius: 8px;
+            text-align: center;
+        }
+        #statusMessage {
+            font-weight: bold;
+            color: #0077b6;
+        }
+        #dbStatusMessage {
+            font-weight: bold;
+            color: #0077b6;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">MediConnect</div>
+            <div class="nav-links">
+                <a href="#">Inicio</a>
+                <a href="#">Servicios</a>
+                <a href="#">Especialidades</a>
+                <a href="#">Contacto</a>
+                <a href="#" class="btn">Iniciar Sesión</a>
+            </div>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <h1>Tu salud en buenas manos</h1>
+            <p>MediConnect es una plataforma médica integral que conecta pacientes con profesionales de la salud, facilitando la gestión de citas, expedientes clínicos y más.</p>
+            <a href="#" class="btn">Regístrate Gratis</a>
+        </div>
+    </section>
+
+    <section class="features">
+        <div class="container">
+            <h2>Nuestros Servicios</h2>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h3>Expediente Clínico Digital</h3>
+                    <p>Mantén tu historial médico seguro y accesible en todo momento, cumpliendo con los estándares médicos más exigentes.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Agenda de Citas</h3>
+                    <p>Programa y gestiona tus citas médicas de forma sencilla, con recordatorios automáticos y confirmaciones en tiempo real.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Directorio Médico</h3>
+                    <p>Accede a nuestra base de profesionales verificados y especialistas en diversas áreas de la medicina.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Recetas Electrónicas</h3>
+                    <p>Recibe y gestiona tus recetas médicas de forma digital, con validez oficial y acceso directo a farmacias.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Laboratorio Digital</h3>
+                    <p>Solicita estudios de laboratorio y consulta tus resultados desde cualquier dispositivo, de manera segura y confidencial.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Mensajería Segura</h3>
+                    <p>Comunícate directamente con tu médico a través de nuestro sistema de mensajería cifrada y confidencial.</p>
+                </div>
+            </div>
+
+            <div class="api-status">
+                <h3>Estado del API</h3>
+                <p id="statusMessage">Verificando estado del servidor...</p>
+                <p id="dbStatusMessage">Verificando conexión a base de datos...</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 MediConnect. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Verificar el estado del API
+        fetch('/api/health')
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('statusMessage').textContent = 
+                    `Estado del servidor: ${data.status} - ${data.message}`;
+                document.getElementById('statusMessage').style.color = '#28a745';
+            })
+            .catch(error => {
+                document.getElementById('statusMessage').textContent = 
+                    'Error: No se pudo conectar con el servidor';
+                document.getElementById('statusMessage').style.color = '#dc3545';
+                console.error('Error:', error);
+            });
+
+        // Verificar la conexión a la base de datos
+        fetch('/api/db-test')
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('dbStatusMessage').textContent = 
+                    `Base de datos: ${data.status} - ${data.message} (${data.timestamp})`;
+                document.getElementById('dbStatusMessage').style.color = '#28a745';
+            })
+            .catch(error => {
+                document.getElementById('dbStatusMessage').textContent = 
+                    'Error: No se pudo conectar con la base de datos';
+                document.getElementById('dbStatusMessage').style.color = '#dc3545';
+                console.error('Error:', error);
+            });
+    </script>
+</body>
+</html>

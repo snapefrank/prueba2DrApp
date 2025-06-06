@@ -1,0 +1,74 @@
+2. ADAPTACIÓN AL NUEVO SISTEMA DE SUBDOMINIOS
+Acciones:
+Asegurar que después del login, la app:
+
+Detecte automáticamente el rol o tipo de usuario (ej. paciente, médico, laboratorio, admin).
+
+Redirija automáticamente al subdominio correspondiente.
+
+Redirección esperada:
+
+Tipo de usuario	Subdominio destino
+Médico	https://medico.midominio.com
+Paciente	https://paciente.midominio.com
+Laboratorio	https://laboratorio.midominio.com
+Administrador	https://admin.midominio.com
+3. FLUJO DE REDIRECCIÓN AUTOMÁTICA DESPUÉS DEL LOGIN
+Al momento de iniciar sesión:
+
+Detectar el tipo de usuario en el objeto de sesión, JWT, o respuesta de API (role, userType, etc.).
+
+Ejecutar redirección inmediata basándose en el tipo de usuario:
+
+tsx
+Copiar
+Editar
+if (user.role === 'medico') {
+  window.location.href = "https://medico.midominio.com/dashboard";
+} else if (user.role === 'paciente') {
+  window.location.href = "https://paciente.midominio.com/dashboard";
+} else if (user.role === 'laboratorio') {
+  window.location.href = "https://laboratorio.midominio.com/dashboard";
+} else if (user.role === 'admin') {
+  window.location.href = "https://admin.midominio.com/dashboard";
+}
+Nota: La redirección debe ser automática y rápida.
+
+Importante: Preservar el token de sesión/cookie al hacer el cambio de subdominio.
+
+4. LÓGICA DE NAVBAR PARA BOTONES
+Cuando el usuario NO está logueado:
+
+tsx
+Copiar
+Editar
+{!isLoggedIn && (
+  <>
+    <Button href="/login">Iniciar Sesión</Button>
+    <Button href="/register">Registrarse</Button>
+  </>
+)}
+Cuando el usuario está logueado:
+
+tsx
+Copiar
+Editar
+{isLoggedIn && (
+  <Button href="/dashboard">Mi Dashboard</Button>
+)}
+(O mejor aún: Ocultar todo y dejar que el redireccionamiento al subdominio tome control automático después del login.)
+
+5. COMPORTAMIENTO ESPERADO DE SESIÓN Y AUTENTICACIÓN
+El login ocurre siempre en el dominio principal (midominio.com).
+
+La app detecta el tipo de usuario y lo redirige al subdominio correspondiente.
+
+Las cookies de sesión o tokens deben configurarse con:
+
+http
+Copiar
+Editar
+Domain=.midominio.com
+para que funcionen en todos los subdominios.
+
+El estado de sesión (isLoggedIn) debe persistir incluso al cambiar de subdominio.

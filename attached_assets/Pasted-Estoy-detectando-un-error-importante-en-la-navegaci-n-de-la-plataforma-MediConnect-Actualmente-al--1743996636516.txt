@@ -1,0 +1,60 @@
+Estoy detectando un error importante en la navegación de la plataforma MediConnect. Actualmente, al hacer clic en las secciones del menú superior:
+
+Inicio
+
+Especialidades
+
+¿Cómo funciona?
+
+Precios
+
+ninguna de ellas redirecciona a la sección correspondiente, y esto afecta la experiencia del usuario. Necesitamos implementar lo siguiente de forma puntual:
+
+✅ Solución requerida:
+Corregir las rutas de cada ítem del menú para que redireccionen correctamente mediante React Router.
+
+Las rutas correctas deben ser:
+
+🔗 Inicio → /
+
+🔗 Especialidades → /especialidades
+
+🔗 ¿Cómo funciona? → /como-funciona
+
+🔗 Precios → /precios
+
+En el archivo del navbar (Header.tsx o equivalente), deben usar Link o useNavigate() de react-router-dom, por ejemplo:
+
+tsx
+Copiar
+Editar
+<Link to="/especialidades">Especialidades</Link>
+📄 Contenido que debe aparecer al hacer clic (resumen de lo platicado):
+🏥 Especialidades (/especialidades)
+Tarjetas visuales con al menos estas especialidades:
+
+Medicina general, Ginecología, Pediatría, Nutrición, Dermatología, Psicología, Psiquiatría, Oftalmología, Traumatología, Medicina interna, Endocrinología, Urología, etc.
+
+Cada una debe abrir su propia subpágina: /especialidades/ginecologia y similares.
+
+📋 ¿Cómo funciona? (/como-funciona)
+Dividir el contenido en 3 bloques:
+
+👨‍⚕️ Para médicos: cómo registrarse, subir cédula, usar recetas, órdenes de laboratorio, expediente, etc.
+
+🧍 Para pacientes: cómo agendar, recibir resultados, acceder a historial médico.
+
+🧪 Para laboratorios: cómo recibir órdenes, subir resultados, trabajar con MediConnect.
+
+Mostrar con íconos o bloques separados y textos claros (puedo proveer textos exactos si los requieren).
+
+💰 Precios (/precios)
+Mostrar que los médicos no pagan mensualidad fija, sino que:
+
+Se descuenta un porcentaje de cada consulta agendada por la plataforma.
+
+Ejemplo visual: Consulta $600 → se descuenta 10% ($60) → Médico recibe $540.
+
+Los pacientes solo pagan por consulta cuando agendan.
+
+También mostrar posibles futuros planes (PRO o ELITE) si se desea escalar.

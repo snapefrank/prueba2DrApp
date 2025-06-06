@@ -1,0 +1,81 @@
+1. Redirecciones y navegación funcional
+Verificar que todos los botones de navegación del sitio (header, footer y páginas internas) redireccionen correctamente.
+
+Confirmar que están activas las siguientes rutas principales:
+
+/especialidades
+
+/como-funciona
+
+/precios
+
+/login
+
+/registro-medico
+
+/registro-paciente
+
+🏥 2. Página: Especialidades
+Crear la vista /especialidades con tarjetas visuales de especialidades médicas.
+
+Incluir al menos estas especialidades comunes y más buscadas:
+
+Medicina general, Ginecología, Pediatría, Dermatología, Psicología, Nutrición, Psiquiatría, Oftalmología, Traumatología, Medicina interna, Endocrinología, Urología, Otorrinolaringología, Fisioterapia, Reumatología.
+
+Cada tarjeta debe redireccionar a su subpágina, por ejemplo: /especialidades/ginecologia.
+
+📋 3. Página: Cómo Funciona
+Crear la sección /como-funciona con explicación clara, dividida en bloques para:
+
+👨‍⚕️ Médicos: cómo registrarse, subir cédula, verificar perfil, usar recetas, órdenes y expediente.
+
+🧍 Pacientes: cómo agendar, recibir receta, acceder a resultados de laboratorio.
+
+🧪 Laboratorios: cómo afiliarse, recibir órdenes, subir resultados y ganar visibilidad.
+
+Incluir textos que expliquen las funciones disponibles según el perfil (yo puedo proveer el texto exacto si lo requieren).
+
+💰 4. Página: Precios (con modelo de cobro cruzado para médicos)
+Crear la vista /precios e incluir este esquema:
+
+Para médicos:
+No hay costo fijo mensual.
+
+El uso de MediConnect se monetiza a través de un descuento por consulta:
+
+Ejemplo: consulta $600 → se descuenta 10% ($60) → el médico recibe $540.
+
+Esto incluye:
+
+Herramientas profesionales: Recetas, órdenes, expediente, historial, resultados.
+
+Visibilidad, soporte y mejoras futuras.
+
+Opción de planes premium más adelante (ej. plan Elite, visibilidad preferencial).
+
+Para pacientes:
+Registro gratuito.
+
+Solo pagan por consulta cuando agendan.
+
+Descuentos con laboratorios afiliados incluidos en la orden.
+
+🧰 5. Extras técnicos
+Verificar que el perfil del médico verificado incluya pestañas funcionales para:
+
+Recetas electrónicas
+
+Módulo de laboratorio
+
+Expediente clínico
+
+Todas las acciones deben guardar correctamente en la base de datos.
+
+Preparar espacio futuro para implementar:
+
+Panel de laboratorios afiliados
+
+Notificaciones internas
+
+Visualización avanzada de resultados
+

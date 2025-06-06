@@ -1,0 +1,89 @@
+A continuación tienes instrucciones precisas para que cada enlace del sidebar esté bien estructurado, sin 404s, y con un UX pulido. Integra estas indicaciones al pie de la letra:
+
+1. Rutas y vistas asociadas
+
+Enlace	Ruta	Componente	Contenido clave
+Página Principal	/	HomePage	Portada pública con hero, cómo funciona, testimonios
+Panel	/dashboard	DashboardHome	Tarjetas de KPIs + tabla “Próximas citas”
+Pacientes	/dashboard/pacientes	PacientesPage	Lista de pacientes (nombre, edad, última cita) + botón “Ver ficha”
+Agenda	/dashboard/agenda	AgendaPage	Calendario mensual + listado de citas del día + “Agregar horario”
+Recetas	/dashboard/recetas	RecetasListPage	Tabla de recetas + “Crear receta” → /dashboard/recetas/nueva
+Laboratorio	/dashboard/laboratorio	LaboratorioPage	Órdenes pendientes + “Subir resultados”
+Expedientes	/dashboard/expedientes	ExpedientesPage	Historial clínico filtrable por paciente y fecha
+Consulta	/dashboard/consulta	ConsultaPage	Consultas activas/en espera + formulario de notas
+Tareas	/dashboard/tareas	TareasPage	Lista de tareas con checkboxes + “Nueva tarea”
+Mensajes	/dashboard/mensajes	MensajesListPage	Lista de conversaciones + chat al seleccionar
+Chat	/dashboard/chat	ChatPage	Interfaz de chat global (o multidominio)
+Mi Perfil	/dashboard/perfil	PerfilPage	Datos del médico (nombre, especialidad, foto) + “Editar perfil”
+Configuración	/dashboard/configuracion	ConfiguracionPage	Cambio de contraseña + preferencias de notificaciones
+Suscripciones	/dashboard/suscripciones	SuscripcionesPage	Estado de plan, opciones de upgrade, método de pago
+Cerrar sesión	botón en sidebar	—	Logout + limpiar sesión + redirigir a /login en dominio principal
+IMPORTANTE: Cada uno de estos paths debe estar definido dentro del bloque <Route path="/dashboard" element={<DashboardLayout/>}>…</Route> para que React Router cargue siempre el sidebar.
+
+2. Evitar errores 404 y pantallas en blanco
+Router (AppRouter):
+
+Asegura que exista un <Route path="*" para rutas no encontradas, dentro y fuera del dashboard, que muestre <NotFound />.
+
+Verifica que no haya rutas huérfanas fuera del <DashboardLayout>.
+
+Fallback en el servidor:
+
+Configura Express para servir index.html en cualquier /dashboard/*.
+
+Componente mínimo:
+
+Cada página debe al menos devolver un encabezado (<h1>) con su nombre mientras desarrollas, para descartar blank screens.
+
+3. Detalles de UX por sección
+Sidebar
+
+Fondo neutro (#F8F9FA), íconos antes del texto, hover con fondo #E9ECEF.
+
+Enlace activo subrayado o con borde izquierdo (4 px, color principal).
+
+Texto legible (16 px) y espaciado vertical (12 px).
+
+Header de sección
+
+Título grande (24 px, semibold) + breadcrumbs debajo (14 px, gris).
+
+Layout
+
+Flex container: sidebar fijo a la izquierda (w-64), área principal flex-1.
+
+Padding interior: 24 px móvil / 32 px desktop.
+
+Formulario y tablas
+
+Inputs 40 px alto, border-radius 8 px, focus con borde primario + sombra ligera.
+
+Errores inline en rojo (12 px) y spinner en botones.
+
+Tablas con filas alternas, header gris claro, hover fila.
+
+Feedback
+
+Toasts arriba derecha (3 s, icono check/error).
+
+Modales centrados con overlay semitransparente.
+
+Animaciones suaves (hover 200 ms, fade-modal 300 ms).
+
+Responsivo
+
+Sidebar colapsable en móvil con un botón hamburger en el header.
+
+Asegurar contraste mínimo 4.5:1 y aria-labels en elementos interactivos.
+
+4. Pruebas de verificación
+Navegación: clic en cada enlace → URL correcta + componente visible.
+
+404: no debe mostrarse nunca (solo si realmente es ruta inválida).
+
+Sidebar: siempre presente tras login en cualquier /dashboard/*.
+
+Cargas y errores: loaders en peticiones + mensajes de error claros.
+
+UX: hover, focus, estados deshabilitados, toasts y modales probados.
+

@@ -1,0 +1,217 @@
+Para garantizar que cada clic en el dashboard médico (doctor.midominio.com/dashboard) realice exactamente la acción esperada y no quede nada en blanco ni lance 404, aquí van instrucciones muy detalladas para cada sección del sidebar. Por favor implementa rutas, API calls y componentes siguiendo este flujo.
+
+1. Dashboard (home)
+Ruta: /dashboard
+
+Al hacer clic:
+
+Navegar a /dashboard.
+
+Cargar el componente DashboardHome.
+
+Ejecutar peticiones:
+
+GET /api/doctor/{doctorId}/stats → devuelve { totalPatients, todayAppointments, upcomingAppointments }.
+
+GET /api/doctor/{doctorId}/nextAppointments?limit=5 → lista las próximas 5 citas.
+
+Mostrar tarjetas con estadísticas y la tabla de “Próximas citas”.
+
+2. Pacientes
+Ruta: /dashboard/pacientes
+
+Al hacer clic:
+
+Navegar a /dashboard/pacientes.
+
+Renderizar PacientesPage.
+
+Petición:
+
+GET /api/doctor/{doctorId}/patients → array de pacientes { id, name, age, lastAppointment }.
+
+Mostrar lista (tabla o cards) con:
+
+Nombre completo
+
+Edad
+
+Fecha de última consulta
+
+Botón “Ver detalle” junto a cada paciente que redirige a /dashboard/pacientes/{patientId}.
+
+3. Agenda
+Ruta: /dashboard/agenda
+
+Al hacer clic:
+
+Navegar a /dashboard/agenda.
+
+Renderizar AgendaPage.
+
+Peticiones:
+
+GET /api/doctor/{doctorId}/schedule → devuelve { date: string, slots: [{ time, available }] }.
+
+GET /api/doctor/{doctorId}/appointments?date=YYYY-MM-DD → citas de ese día.
+
+Mostrar un calendario mensual con:
+
+Días con citas resaltados.
+
+Al hacer clic en un día, cargar slots y citas programadas.
+
+Botón “Agregar horario” que abre modal para crear nuevos slots (POST /api/doctor/{doctorId}/schedule).
+
+4. Recetas
+Ruta: /dashboard/recetas
+
+Al hacer clic:
+
+Navegar a /dashboard/recetas.
+
+Renderizar RecetasPage.
+
+Peticiones:
+
+GET /api/doctor/{doctorId}/prescriptions → lista de recetas { id, patientName, date, status }.
+
+Mostrar tabla de recetas con:
+
+Botón “Ver/Editar” (/dashboard/recetas/{prescriptionId})
+
+Botón “Crear nueva receta” que abre formulario (POST /api/doctor/{doctorId}/prescriptions).
+
+5. Laboratorio
+Ruta: /dashboard/laboratorio
+
+Al hacer clic:
+
+Navegar a /dashboard/laboratorio.
+
+Renderizar LaboratorioPage.
+
+Peticiones:
+
+GET /api/lab/requests?doctorId={doctorId} → solicitudes de laboratorio.
+
+Mostrar lista de órdenes con:
+
+Botones “Ver resultado” (/dashboard/laboratorio/{orderId})
+
+Botón “Enviar a laboratorio” si está pendiente.
+
+6. Expedientes
+Ruta: /dashboard/expedientes
+
+Al hacer clic:
+
+Navegar a /dashboard/expedientes.
+
+Renderizar ExpedientesPage.
+
+Petición:
+
+GET /api/doctor/{doctorId}/medical-records → historial clínico de pacientes.
+
+Mostrar lista de expedientes con filtros por paciente y fecha.
+
+7. Consulta
+Ruta: /dashboard/consulta
+
+Al hacer clic:
+
+Navegar a /dashboard/consulta.
+
+Renderizar ConsultaPage.
+
+Peticiones:
+
+GET /api/doctor/{doctorId}/currentConsultations → consultas activas o en espera.
+
+Mostrar panel donde el médico puede:
+
+Seleccionar consulta activa.
+
+Agregar notas clínicas y guardar (PUT /api/doctor/{doctorId}/consultations/{consultationId}).
+
+8. Tareas
+Ruta: /dashboard/tareas
+
+Al hacer clic:
+
+Navegar a /dashboard/tareas.
+
+Renderizar TareasPage.
+
+Petición:
+
+GET /api/doctor/{doctorId}/tasks → lista de tareas médicas.
+
+Mostrar lista con:
+
+Checkbox para marcar como completada (PATCH /api/doctor/{doctorId}/tasks/{taskId})
+
+Botón “Agregar tarea”.
+
+9. Mensajes
+Ruta: /dashboard/mensajes
+
+Al hacer clic:
+
+Navegar a /dashboard/mensajes.
+
+Renderizar MensajesPage.
+
+Peticiones:
+
+GET /api/messages?userId={doctorId} → conversaciones.
+
+Al abrir una conversación: GET /api/messages/{conversationId}.
+
+Mostrar lista de chats y área de mensajes con estilo chat.
+
+10. Ver perfil
+Ruta: /dashboard/perfil
+
+Al hacer clic:
+
+Navegar a /dashboard/perfil.
+
+Renderizar PerfilPage.
+
+Petición:
+
+GET /api/doctor/{doctorId}/profile → datos de perfil.
+
+Mostrar formulario editable con:
+
+Nombre, cédula, especialidad, biografía.
+
+Botón “Guardar cambios” (PUT /api/doctor/{doctorId}/profile).
+
+11. Configuración
+Ruta: /dashboard/configuracion
+
+Al hacer clic:
+
+Navegar a /dashboard/configuracion.
+
+Renderizar ConfiguracionPage.
+
+Opciones a incluir:
+
+Cambiar contraseña (PATCH /api/auth/change-password).
+
+Preferencias de notificación (PATCH /api/doctor/{doctorId}/settings).
+
+12. Cerrar sesión
+Acción: Botón “Cerrar sesión”
+
+Al hacer clic:
+
+Llamar a POST /api/auth/logout con withCredentials.
+
+Limpiar estado de sesión en frontend (clearToken(), clearUser()).
+
+Redirigir a /login en el dominio principal (midominio.com/login).

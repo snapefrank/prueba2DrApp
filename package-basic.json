@@ -1,0 +1,19 @@
+{
+  "name": "mediconnect-api",
+  "version": "1.0.0",
+  "description": "API para MediConnect - Plataforma médica con gestión de perfiles, citas y expedientes",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "node index.js"
+  },
+  "keywords": [
+    "mediconnect",
+    "healthcare",
+    "api",
+    "medical"
+  ],
+  "author": "",
+  "license": "MIT"
+}

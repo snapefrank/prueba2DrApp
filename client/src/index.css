@@ -1,0 +1,92 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Cambiado el fondo a #F9FAFB (210 20% 98%) */
+    --background: 210 20% 98%;
+    --foreground: 222.2 84% 4.9%; /* #111827 - negro principal */
+    /* Cambiado el fondo de las tarjetas a #FFFFFF */
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+    /* Cambiado el color primario a #2563EB (217 91% 53%) */
+    --primary: 217 91% 53%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 217 91% 53%;
+    --radius: 0.375rem;
+    /* Chart colors - actualizado el primero al nuevo azul */
+    --chart-1: 217 91% 53%;
+    --chart-2: 262 83% 58%;
+    --chart-3: 316 70% 50%;
+    --chart-4: 175 84% 32%;
+    --chart-5: 25 95% 53%;
+  }
+
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+    /* Tarjetas con mayor contraste en modo oscuro */
+    --card: 220 13% 18%;
+    --card-foreground: 210 40% 98%;
+    --popover: 220 13% 18%;
+    --popover-foreground: 210 40% 98%;
+    /* Mismo azul primario que en modo claro */
+    --primary: 217 91% 53%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 217 91% 53%;
+  }
+  
+  /* Adaptar colores específicos de MediConnect para modos claro/oscuro */
+  :root {
+    /* Colores de MediConnect en modo claro */
+    --mediconnect-sidebar-bg: 210 40% 98%;
+    /* Color de texto principal: #111827 */
+    --mediconnect-sidebar-text: 222.2 84% 4.9%;
+    /* Actualizado al azul #2563EB */
+    --mediconnect-sidebar-hover: 217 91% 53%;
+    --mediconnect-sidebar-hover-bg: 217 100% 97%;
+    /* Fondo del dashboard: #F9FAFB */
+    --mediconnect-dashboard-bg: 210 20% 98%;
+  }
+  
+  .dark {
+    /* Colores de MediConnect en modo oscuro */
+    --mediconnect-sidebar-bg: 222.2 47.4% 11.2%;
+    --mediconnect-sidebar-text: 210 40% 98%;
+    /* Mismo azul primario que en modo claro */
+    --mediconnect-sidebar-hover: 217 91% 53%;
+    --mediconnect-sidebar-hover-bg: 222.2 47.4% 18%;
+    --mediconnect-dashboard-bg: 222.2 47.4% 10%;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply font-sans antialiased bg-background text-foreground;
+  }
+}

@@ -1,0 +1,137 @@
+BJETIVOS
+
+1. Identificar y eliminar la redirección incondicional al subdominio `doctor`.
+2. Implementar una lógica de redirección por rol correctamente diferenciada.
+3. Asegurar que el botón de acceso de emergencia solo esté disponible cuando sea necesario.
+4. Garantizar que la sesión se valide correctamente antes de redirigir.
+5. Prevenir condiciones por defecto inseguras o inconsistentes.
+
+---
+
+## 📁 ARCHIVOS A EDITAR
+
+- `/auth/Login.jsx` (o donde se maneje el login)
+- `/context/AuthContext.jsx`
+- `/routes/RouteGuard.jsx` y `/routes/RoleProtectedRoute.jsx`
+- Cualquier archivo que tenga lógica global de `useEffect` con `window.location`
+- Archivo donde se haya implementado `Acceso de emergencia`
+
+---
+
+## 🧠 1. LÓGICA DE REDIRECCIÓN POR ROL (MEJORADA)
+
+En el login, después de validar al usuario, reemplaza cualquier redirección incondicional como esta:
+```js
+window.location.replace("https://doctor.tudominio.com");
+```
+
+Por este esquema seguro:
+```js
+switch(user.role) {
+  case 'medico':
+    window.location.replace("https://doctor.tudominio.com");
+    break;
+  case 'paciente':
+    window.location.replace("https://paciente.tudominio.com");
+    break;
+  case 'admin':
+    window.location.replace("https://admin.tudominio.com");
+    break;
+  case 'laboratorio':
+    window.location.replace("https://lab.tudominio.com");
+    break;
+  default:
+    alert("Rol no reconocido. Por favor, contacta al soporte.");
+    logout();
+    break;
+}
+```
+
+---
+
+## 🛑 2. DETECCIÓN Y ELIMINACIÓN DE REDIRECCIÓN INVÁLIDA GLOBAL
+
+Busca dentro de cualquier archivo con `useEffect(() => {...}, [])` que tenga una redirección así:
+```js
+useEffect(() => {
+  window.location.replace("https://doctor.tudominio.com");
+}, []);
+```
+
+🔴 Esta redirección se ejecuta cada vez que se monta el componente, sin importar si el usuario tiene sesión válida o no. **Debe eliminarse o reemplazarse** por lógica controlada por `AuthContext`.
+
+✅ Reemplaza por:
+```js
+useEffect(() => {
+  if (user && user.role) {
+    // redirige solo si hay sesión y rol válido
+    switch(user.role) {
+      ...
+    }
+  }
+}, [user]);
+```
+
+---
+
+## 🔐 3. BOTÓN DE ACCESO DE EMERGENCIA — LÓGICA DE SEGURIDAD
+
+Verifica si tienes algo como esto activo en producción:
+```js
+<button onClick={() => window.location.replace("https://doctor.tudominio.com")}>Acceso de emergencia</button>
+```
+
+⚠️ Este botón debería **estar oculto por defecto**, y solo mostrarse si hay una condición real de fallo (ejemplo: fallo en la API de login).
+
+✅ Refactoriza así:
+```js
+{loginError && (
+  <div className="emergency-access">
+    <p>¿No puedes iniciar sesión? Prueba acceso de emergencia:</p>
+    <button onClick={() => window.location.replace("https://doctor.tudominio.com")}>Acceder como médico (emergencia)</button>
+  </div>
+)}
+```
+
+Y asegúrate de que `loginError` esté definido como estado controlado:
+```js
+const [loginError, setLoginError] = useState(false);
+```
+
+Y que solo se active si la autenticación real falla:
+```js
+.catch(() => setLoginError(true));
+```
+
+---
+
+## 🧼 4. LIMPIEZA Y SEGURIDAD DE SESIÓN
+
+Incluye en `AuthContext.jsx` una función visible para desarrollo, pero que no se ejecute en producción:
+```js
+window.clearMediConnectSession = () => {
+  localStorage.removeItem("mediUser");
+  location.reload();
+};
+```
+Pero asegúrate de que **esta función solo se exponga en `development`**:
+```js
+if (process.env.NODE_ENV === 'development') {
+  window.clearMediConnectSession = () => {
+    localStorage.removeItem("mediUser");
+    location.reload();
+  };
+}
+```
+
+---
+
+## ✅ 5. PRUEBAS A REALIZAR LUEGO DE APLICAR ESTE PROMPT
+
+| Escenario | Resultado Esperado |
+|----------|----------------------|
+| Login como paciente | Redirige a `https://paciente.tudominio.com` |
+| Login como médico | Redirige a `https://doctor.tudominio.com` |
+| Login como admin | Redirige a `https://admin.tudominio.com` |
+| Usuario sin rol válido | Alerta + logout |
+| Usuario con fallo de login | Muestra acceso de emergencia |

@@ -1,0 +1,88 @@
+Tras tus últimos ajustes (cookies, CORS, baseURL absoluto, detección de subdominios y apiRequest en queryClient.ts), al intentar hacer login ahora recibimos un “Network Error” en el cliente. Necesitamos indagar qué está fallando en la comunicación entre frontend y backend.
+
+Por favor, sigue estos pasos para localizar y corregir el problema:
+
+1. Inspección en DevTools (Cliente)
+Abre DevTools ➔ pestaña Network ➔ filtra por la petición de login (por ejemplo POST /api/login).
+
+Comprueba:
+
+URL completa a la que se está enviando la petición.
+
+Estado (¿se envía?, ¿queda en pending?, ¿bloqueado?).
+
+Mensaje exacto de error en Console (“Network Error”, “ERR_CONNECTION_REFUSED”, “Mixed Content”, etc.).
+
+Saca una captura de pantalla o copia la traza de la petición (Headers, Preview/Response, Console).
+
+2. Verificar accesibilidad del endpoint
+En la terminal del entorno de Replit (o local), ejecuta:
+
+bash
+Copiar
+Editar
+curl -v https://midominio.com/api/login \
+  -H "Content-Type: application/json" \
+  -d '{"email":"tu@ejemplo.com","password":"123"}'
+¿Llega respuesta 200, 4xx, 5xx o ni siquiera conecta?
+
+Si no conecta, revisa que el servidor Express esté en escucha en el puerto y host correctos, y que el reverse-proxy (Replit) esté configurado para enrutar /api/* adecuadamente.
+
+3. Comprobar Mixed Content / HTTPS
+Si tu frontend carga sobre HTTPS, asegúrate de que todas las peticiones al backend usen https://, no http://.
+
+En queryClient.ts o en tu cliente Axios/Fetch, confirma que baseURL comience con https://.
+
+4. Revisar configuración de proxy en desarrollo
+En vite.config.ts, valida o añade:
+
+ts
+Copiar
+Editar
+export default defineConfig({
+  server: {
+    proxy: {
+      '/api': {
+        target: 'http://localhost:3000',
+        changeOrigin: true,
+        secure: false,
+      },
+    },
+  },
+});
+Esto garantiza que en dev las llamadas a /api funcionen igual en cualquier subdominio.
+
+5. Registrar peticiones en el servidor
+En server/routes.ts, antes de las rutas, añade un logger tipo Morgan:
+
+ts
+Copiar
+Editar
+import morgan from 'morgan';
+app.use(morgan('dev'));
+Así verás en consola del servidor si la petición de /api/login llega o se bloquea antes.
+
+6. Ajustes en queryClient.ts
+Para capturar mejor el error en cliente, configura tu Query Client así:
+
+ts
+Copiar
+Editar
+import { QueryClient } from '@tanstack/react-query';
+
+export const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      retry: false,
+      onError: (error) => {
+        console.error('React-Query error:', error);
+      },
+    },
+    mutations: {
+      retry: false,
+      onError: (error) => {
+        console.error('Mutation error:', error);
+      },
+    },
+  },
+});

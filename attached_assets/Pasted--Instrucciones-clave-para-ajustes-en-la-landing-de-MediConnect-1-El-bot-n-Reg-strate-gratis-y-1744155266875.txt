@@ -1,0 +1,42 @@
+🔧 Instrucciones clave para ajustes en la landing de MediConnect:
+
+1. El botón "Regístrate gratis" y "Regístrate como médico" deben redirigir primero a la sección de **Planes y Precios**. Sólo si el usuario continúa, se le debe llevar al registro. Si ya tiene cuenta, se redirige al pago.
+
+2. El botón "Contactar a ventas" debe abrir un **formulario emergente** con los siguientes campos:
+   - Nombre completo
+   - Correo electrónico
+   - Teléfono
+   - Puesto
+   - Empresa/laboratorio
+   - Botón enviar → confirmación: “Gracias, te contactaremos pronto”
+
+3. Corregir el funcionamiento de los botones:
+   - “Ver planes” → debe llevar a la sección de planes
+   - “¿Cómo funciona?” → debe llevar a su propia sección explicativa
+
+4. En la sección **Planes**:
+   - Si el usuario no tiene cuenta, redirigir al formulario de registro
+   - Si ya está registrado, llevar directamente al **checkout**, con el monto correcto según el plan seleccionado
+   - El sistema debe validar la cuenta antes de procesar el pago
+
+5. En la sección **Recursos**, verificar que todos los enlaces redirijan correctamente (documentación, soporte, ayuda, etc.).
+
+6. En la sección **Sobre nosotros**, colocar:
+   - Misión
+   - Visión
+   - Valores de MediConnect
+   - Qué hace la empresa (vinculación médico-paciente, IA, expediente clínico, laboratorio, etc.)
+
+7. En la sección **Legal**, el botón debe llevar a una nueva página titulada “Términos y Condiciones” con dos apartados:
+   - 🩺 Términos para médicos (validación, uso del sistema, cobros por suscripción, responsabilidad, confidencialidad)
+   - 👤 Términos para pacientes (expediente, privacidad, citas, recetas, IA asistida, red social médica)
+
+8. Agregar otro botón en el footer llamado **Aviso de Privacidad**, que redirija a su propia página con el aviso ya redactado conforme a la LFPDPPP:
+   - Identidad del responsable
+   - Finalidades del tratamiento (para médicos y pacientes)
+   - Datos recabados y sensibles
+   - Ejercicio de derechos ARCO
+   - Política de cookies
+   - Cambios al aviso
+
+✅ Asegurarse que todos los enlaces funcionen bien tanto en versión web como móvil. Corregir botones que no redirigen correctamente o no tienen comportamiento activo.

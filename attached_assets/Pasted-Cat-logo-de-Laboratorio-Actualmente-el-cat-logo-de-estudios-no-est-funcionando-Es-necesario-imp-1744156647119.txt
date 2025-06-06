@@ -1,0 +1,55 @@
+Catálogo de Laboratorio:
+
+Actualmente el catálogo de estudios no está funcionando.
+
+Es necesario implementarlo utilizando la lista de estudios de laboratorio clínico e imagenología aprobados por COFEPRIS.
+
+Este catálogo debe incluir estudios comunes y su clasificación, y debe ser navegable por el usuario (con buscador y filtros).
+
+Laboratorios y Clínicas (animaciones):
+
+En la sección de “Laboratorios y Clínicas”, aún no se han cargado ejemplos reales.
+
+Mientras tanto, se deben colocar animaciones o representaciones visuales de cómo se verán los laboratorios afiliados, con ejemplos de logos, promociones o interfaz de carga de resultados.
+
+Esto genera confianza y da una idea clara del funcionamiento.
+
+Página “Sobre nosotros”:
+
+Se debe escribir y colocar un texto introductorio claro que explique:
+
+¿Qué es MediConnect?
+
+¿Cuál es nuestra misión, visión y objetivos?
+
+¿Qué valores proyectamos?
+
+Este apartado debe reflejar transparencia y profesionalismo, para generar confianza con médicos, pacientes y aliados comerciales.
+
+Página de inicio – corrección visual:
+
+Algunas imágenes no están cargando correctamente (revisar vínculos rotos o nombres mal escritos).
+
+Verificar que todos los elementos gráficos se muestren adecuadamente tanto en versión desktop como móvil.
+
+Formulario de registro para médicos:
+
+Al momento de registrarse como profesional de la salud, debe mostrarse una barra desplegable con las siguientes opciones:
+
+Tipo de profesional: médico general, especialista, dentista, psicólogo, nutriólogo, fisioterapeuta, etc.
+
+En caso de seleccionar “especialista” o “otra profesión”, se debe habilitar una segunda barra para seleccionar la especialidad o área clínica específica.
+
+Esto es esencial para organizar perfiles profesionales correctamente desde el inicio.
+
+Sección de precios:
+
+Actualmente las opciones de precio muestran “$0”, lo cual no es correcto.
+
+Se deben actualizar los precios reales según los planes ya definidos. Recordar que:
+
+El cobro es por suscripción mensual (no por consulta individual).
+
+Si el paciente sobrepasa su límite de consultas, podrá pagar extra por consulta adicional a precio accesible.
+
+El médico podría estar sujeto a un cobro proporcional (ej. 20%) sobre cada consulta, en planes futuros.

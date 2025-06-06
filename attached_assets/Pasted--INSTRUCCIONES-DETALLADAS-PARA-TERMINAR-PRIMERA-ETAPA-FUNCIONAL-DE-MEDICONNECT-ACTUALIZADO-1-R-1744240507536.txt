@@ -1,0 +1,104 @@
+ INSTRUCCIONES DETALLADAS PARA TERMINAR PRIMERA ETAPA FUNCIONAL DE MEDICONNECT (ACTUALIZADO)
+🔧 1. REGISTRO Y LOGIN
+“Regístrate como médico” debe tener barra desplegable con especialidades.
+
+Si se elige "Psicólogo" o "Dentista", que aparezcan opciones específicas.
+
+Al iniciar sesión, debe redirigir correctamente al dashboard según tipo de usuario (médico/paciente).
+
+Al cerrar sesión, debe redirigir a página principal.
+
+👨‍⚕️ 2. DASHBOARD DEL PACIENTE
+Mostrar:
+
+Listado de médicos por especialidad.
+
+Opción para agendar cita con disponibilidad.
+
+Historial clínico.
+
+Recetas anteriores y estudios.
+
+Reseñas de médicos.
+
+👨‍⚕️ 3. DASHBOARD DEL MÉDICO
+Crear y editar expedientes clínicos.
+
+Subir y ver recetas, estudios y documentos.
+
+Programar citas recurrentes y seguimiento automático.
+
+Implementar IA que:
+
+Proponga diagnóstico con base en síntomas escritos.
+
+Explique el razonamiento.
+
+Mostrarse al final, antes de guardar receta.
+
+🧪 4. LABORATORIOS
+Agregar catálogo con estudios avalados por COFEPRIS.
+
+Permitir carga de PDFs o imágenes.
+
+Paciente puede ver, descargar o compartir resultados.
+
+Si no hay catálogo, usar base con: BH, QS, EGO, etc.
+
+🧩 5. FUNCIONAMIENTO GENERAL Y ERRORES
+Botones “Ver planes”, “Regístrate” y “Contactar ventas” deben funcionar.
+
+“Contactar ventas” debe mostrar formulario: nombre, correo, puesto, empresa, teléfono.
+
+Si ya estás registrado y seleccionas un plan, redirigir a página de pago con precio correcto.
+
+Ningún plan debe decir $0.
+
+“Recursos”, “Sobre Nosotros”, “Configuración” deben activarse.
+
+“Sobre nosotros” debe tener misión, visión, confianza y valores.
+
+Corregir imágenes que no se cargan en página de inicio.
+
+En configuraciones, permitir editar datos y cambiar contraseña.
+
+Agregar tabla con laboratorios simulados si no hay base aún.
+
+Aseguradoras: agregar informe ejemplo precargado.
+
+🧠 6. RED SOCIAL MÉDICA (Fase 1)
+Al registrarse, permitir:
+
+Subir contactos desde teléfono (opcional).
+
+O iniciar sesión con Google o Facebook.
+
+Mostrar si algún contacto visita al mismo médico.
+
+El paciente puede decidir si quiere hacerlo público o anónimo.
+
+Mostrar reseñas de amigos o personas de confianza que recomienden médicos.
+
+En perfil del médico, mostrar cuántos contactos comparten ese doctor.
+
+📄 7. LEGAL Y PRIVACIDAD
+Botón “Legal” debe redirigir a nueva página con:
+
+Términos y Condiciones ya redactados.
+
+Aviso de privacidad alineado con la Ley de Protección de Datos en México.
+
+Mostrar de forma clara en pie de página.
+
+⚠️ 8. OTROS DETALLES URGENTES
+Cierre de sesión no actualiza la vista: corregir para que redirija.
+
+En sección Laboratorios, los botones dan error 404 → eliminar mientras se arregla.
+
+Resultados de laboratorio no cargan: crear módulo temporal funcional.
+
+Subida de fotos no está funcionando: revisar backend.
+
+Analizar ejemplos funcionales: Doctoralia, expedienteclinico.mx, para mejorar UI/UX.
+
+Animaciones en sección Laboratorios y Clínicas si no hay ejemplos reales.

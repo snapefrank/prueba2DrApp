@@ -1,0 +1,70 @@
+Por favor implementa el Módulo de Recetas Médicas Electrónicas con estos requisitos precisos, sin dejar nada al azar:
+
+1. Búsqueda y selección de medicamentos COFEPRIS
+El campo de búsqueda debe sugerir únicamente fármacos aprobados por COFEPRIS (base 2025).
+
+Al escribir mínimamente 3 letras, mostrar un listado desplegable con nombre genérico, comercial y presentación.
+
+No permitir introducir manualmente un nombre que no venga en esa lista.
+
+2. Despliegue de datos básicos al seleccionar
+Una vez elegido el medicamento, rellenar automáticamente:
+
+Nombre genérico
+
+Nombre comercial
+
+Presentación (tabletas, jarabe, inyectable…)
+
+Posología estándar sugerida
+
+3. Edición de dosis y frecuencia
+Debajo de cada medicamento seleccionado, permitir al médico personalizar:
+
+Dosis (campo obligatorio)
+
+Frecuencia (campo obligatorio)
+
+Mostrar un área opcional para instrucciones adicionales al paciente.
+
+4. Agregar múltiples medicamentos
+Incluir un botón “Agregar otro medicamento” que abra un nuevo bloque idéntico de selección y edición.
+
+Validar que al menos un medicamento esté presente antes de continuar.
+
+5. Datos obligatorios de la receta
+Antes de “Emitir receta”, el formulario debe incluir y validar:
+
+Nombre completo del paciente
+
+Edad y sexo del paciente
+
+Nombre completo del médico y su cédula profesional
+
+Especialidad médica
+
+Fecha de emisión (por defecto día actual, editable)
+
+Dirección del consultorio
+
+Firma electrónica (imagen o texto)
+
+6. Generación y descarga de PDF
+Tras guardar, generar automáticamente un PDF con diseño legal:
+
+Encabezado con datos del médico y paciente
+
+Tabla de medicamentos con dosis y frecuencia
+
+Instrucciones adicionales
+
+Firma y, si es posible, código QR para validación
+
+Ofrecer un botón “Descargar Receta” y otro “Enviar por correo”.
+
+7. Validaciones y flujo final
+No permitir emitir receta si falta cualquiera de los campos obligatorios.
+
+Mostrar mensajes claros de error junto a cada campo si está incompleto.
+
+Al éxito, mostrar notificación “Receta creada con éxito” y limpiar el formulario.

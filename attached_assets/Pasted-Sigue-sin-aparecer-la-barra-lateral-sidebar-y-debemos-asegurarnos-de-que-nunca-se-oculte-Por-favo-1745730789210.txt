@@ -1,0 +1,55 @@
+Sigue sin aparecer la barra lateral (sidebar) y debemos asegurarnos de que nunca se oculte. Por favor revisa y corrige lo siguiente paso a paso:
+
+1. Verificar uso del Layout en todas las rutas de /dashboard
+Comprueba que todas las rutas que empiezan con /dashboard estén declaradas dentro del mismo <Route path="/dashboard" element={<DashboardLayout />} />.
+
+Si /dashboard/recetas u otra sección salió de ese bloque, React renderizará sin sidebar. Asegúrate de que ninguna ruta de dashboard esté fuera del layout.
+
+2. Asegurar import y render de <Sidebar /> en DashboardLayout
+Abre tu componente DashboardLayout.tsx y confirma que:
+
+Importas el Sidebar: import Sidebar from './Sidebar';
+
+En el JSX sí lo renderizas, algo como:
+
+jsx
+Copiar
+Editar
+<div className="flex">
+  <Sidebar />
+  <main className="flex-1">
+    <Outlet />
+  </main>
+</div>
+No incluyas condicionales como if (!showSidebar) return null; ni lógica que oculte el sidebar según ruta.
+
+3. Comprobar en DevTools si el <nav> está en el DOM
+Abre la app en /dashboard o /dashboard/recetas, ve a Elements y busca <nav class="sidebar"> o la etiqueta que uses.
+
+Si no aparece, el componente no se está montando. Si aparece pero no se ve, podría estar oculto por CSS.
+
+4. Revisar clases de Tailwind/CSS que puedan ocultarlo
+Asegúrate de que el contenedor del sidebar no tenga clases como hidden, md:hidden o un breakpoint que lo oculte en escritorio.
+
+Verifica que el padre tenga flex o grid para mostrarlo correctamente junto al contenido principal.
+
+5. Comprobar Condicionales de Ruta
+Busca en el código cualquier condición del tipo:
+
+js
+Copiar
+Editar
+if (location.pathname.includes('recetas')) {
+  setShowSidebar(false);
+}
+y elimínala. El sidebar debe mostrarse en todas las vistas de dashboard.
+
+6. Revisar importaciones duplicadas o conflictos
+Asegúrate de que solo exista un <DashboardLayout> envolviendo el contenido y que ninguna página hija (por ejemplo NuevaRecetaPage) importe otro layout distinto sin sidebar.
+
+7. Prueba de corrección
+Guarda cambios y recarga doctor.midominio.com/dashboard.
+
+Verifica que el sidebar aparezca con todos los enlaces.
+
+Navega a /dashboard/recetas y confirma que sigue ahí.

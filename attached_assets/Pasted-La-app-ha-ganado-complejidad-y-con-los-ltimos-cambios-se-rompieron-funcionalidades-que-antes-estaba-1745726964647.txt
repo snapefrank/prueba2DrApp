@@ -1,0 +1,71 @@
+La app ha ganado complejidad y con los últimos cambios se rompieron funcionalidades que antes estaban completamente operativas. Necesitamos concentrarnos en dejar TODO 100 % funcional antes de seguir avanzando. A continuación te paso la lista definitiva de correcciones y validaciones. Si hay cualquier duda sobre cómo queremos que funcione algún módulo, ¡háznoslo saber de inmediato!
+
+1. Navegación y Layout global
+Sidebar: debe mostrarse en todos los dashboards (médico, paciente, laboratorio, administrador).
+
+Enlaces del sidebar: cada clic debe llevar a su vista correspondiente sin pantallas en blanco ni 404.
+
+Logout: limpiar sesión y redirigir al login en el dominio principal (midominio.com/login).
+
+2. Autenticación y subdominios
+Login/Registro: restituir si faltan; mantener redirección automática al subdominio según tipo de usuario.
+
+Sesión compartida: cookies con Domain=.midominio.com; SameSite=None; Secure; withCredentials: true.
+
+SPA fallback: el servidor debe devolver siempre index.html para rutas de dashboard.
+
+3. Dashboard de Médico – flujos internos
+Dashboard Home: mostrar estadísticas y próximas citas.
+
+Pacientes: listar pacientes, con botón “Ver detalle” que abra ficha individual.
+
+Agenda: calendario con slots, listado de citas por día y modal para agregar horarios.
+
+Recetas: Módulo completo (ver sección 4).
+
+Laboratorio: mostrar órdenes pendientes y permitir subir resultados.
+
+Expedientes: historial clínico filtrable por paciente y fecha.
+
+Consulta: gestionar la consulta activa, agregar notas y guardar.
+
+Tareas: lista de tareas con checkboxes y opción de crear nuevas.
+
+Mensajes: chat con lista de conversaciones y área de mensajes.
+
+Perfil: mostrar datos del médico y permitir editar biografía, especialidad, cédula.
+
+Configuración: cambiar contraseña y preferencias.
+
+4. Módulo de Recetas COFEPRIS
+Sidebar visible al entrar a “Recetas”.
+
+Autofill Médico: nombre completo y cédula profesional rellenos automáticamente (solo si DGP validada; si no, bloquear acceso con mensaje).
+
+Búsqueda y listado: campo de autocompletado que muestre solo 10 fármacos aprobados por COFEPRIS 2025; si hay más, mensaje “refina tu búsqueda”.
+
+Selección: al elegir, desplegar nombre genérico, comercial, presentación y posología estándar.
+
+Edición: campos obligatorios de dosis y frecuencia, más área opcional de instrucciones.
+
+Agregar múltiples: botón “Agregar otro medicamento” que abra un nuevo bloque.
+
+Datos pacientes: nombre, edad, sexo.
+
+Datos receta: fecha emisión, especialidad, dirección de consultorio, firma electrónica.
+
+Validación previa: ningún campo obligatorio puede quedar vacío (marcar en rojo y mensaje inline).
+
+Guardar/Emitir: generar PDF legal con todos los campos, firma y QR opcional, y ofrecer “Descargar” y “Enviar por correo”.
+
+Post-guardado: regresar a la lista de recetas con sidebar intacto y toast de éxito.
+
+5. Pruebas y control de calidad
+No debe haber ni un solo 404 al navegar por cualquier ruta del dashboard.
+
+Cada clic en el sidebar o botón interno debe renderizar su componente sin pantallas en blanco.
+
+Console.log de rutas en el layout para verificar useLocation().pathname.
+
+Logs de servidor (morgan) para confirmar que las llamadas API llegan correctamente.
+
