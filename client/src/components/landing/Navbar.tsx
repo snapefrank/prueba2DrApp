@@ -17,47 +17,37 @@ import {
 import { HeaderActions } from "@/components/landing/HeaderActions";
 import { ContactForm } from "@/components/ui/contact-form";
 import { useAuth } from "@/hooks/use-auth";
-import { getDefaultSubdomainForUserType, buildSubdomainUrl } from "@/lib/subdomain";
 
 const Navbar = () => {
   const [location] = useLocation();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { user, logoutMutation } = useAuth();
-  
-  // Determinar si una ruta está activa
+
   const isActive = (path: string) => {
-    if (path === '/') {
-      return location === path;
-    }
+    if (path === '/') return location === path;
     return location.startsWith(path);
   };
-  
-  // Crear una clase para los enlaces activos
-  const linkClass = (path: string) => {
-    return `text-sm font-medium transition-colors hover:text-primary ${
+
+  const linkClass = (path: string) =>
+    `text-sm font-medium transition-colors hover:text-primary ${
       isActive(path) ? "text-primary" : "text-gray-600"
     }`;
-  };
-  
+
   return (
     <header className="sticky top-0 z-50 w-full bg-white border-b border-gray-200">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex h-16 items-center justify-between">
-          {/* Logo y nombre */}
-          <div className="flex">
-            <Link href="/" className="flex items-center">
-              <span className="text-2xl font-bold text-primary">MediConnect</span>
-            </Link>
-          </div>
+      <div className="w-full px-4 sm:px-6 lg:px-8">
+        <div className="flex h-16 items-center justify-between w-full max-w-screen-2xl mx-auto">
           
-          {/* Navegación de escritorio */}
+          {/* Logo */}
+          <Link href="/" className="flex items-center">
+            <span className="text-2xl font-bold text-primary">MediConnect</span>
+          </Link>
+
+          {/* Navegación escritorio */}
           <nav className="hidden md:flex items-center space-x-6">
-            <Link href="/" className={linkClass("/")}>
-              Inicio
-            </Link>
-            <Link href="/especialidades" className={linkClass("/especialidades")}>
-              Especialidades
-            </Link>
+            <Link href="/" className={linkClass("/")}>Inicio</Link>
+            <Link href="/especialidades" className={linkClass("/especialidades")}>Especialidades</Link>
+
             <DropdownMenu>
               <DropdownMenuTrigger className={`flex items-center ${linkClass("/como-funciona")} focus:outline-none`}>
                 <span>Información</span>
@@ -65,37 +55,30 @@ const Navbar = () => {
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end">
                 <DropdownMenuItem asChild>
-                  <Link href="/como-funciona" className="w-full">
-                    Cómo funciona
-                  </Link>
+                  <Link href="/como-funciona" className="w-full">Cómo funciona</Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem asChild>
-                  <Link href="/sobre-nosotros" className="w-full">
-                    Sobre nosotros
-                  </Link>
+                  <Link href="/sobre-nosotros" className="w-full">Sobre nosotros</Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem asChild>
-                  <Link href="/catalogo-laboratorio" className="w-full">
-                    Catálogo de laboratorio
-                  </Link>
+                  <Link href="/catalogo-laboratorio" className="w-full">Catálogo de laboratorio</Link>
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
-            <Link href="/precios" className={linkClass("/precios")}>
-              Precios
-            </Link>
+
+            <Link href="/precios" className={linkClass("/precios")}>Precios</Link>
           </nav>
-          
-          {/* Botones de autenticación y acciones (escritorio) */}
-          <div className="hidden md:flex items-center space-x-4">
+
+          {/* Acciones / Sesión */}
+          <div className="hidden md:flex items-center space-x-4 ml-auto">
             <HeaderActions />
           </div>
-          
+
           {/* Menú móvil */}
           <div className="md:hidden">
             <Sheet open={isMobileMenuOpen} onOpenChange={setIsMobileMenuOpen}>
               <SheetTrigger asChild>
-                <Button variant="ghost" size="icon" className="md:hidden">
+                <Button variant="ghost" size="icon">
                   <Menu className="h-6 w-6" />
                   <span className="sr-only">Abrir menú</span>
                 </Button>
@@ -111,53 +94,39 @@ const Navbar = () => {
                       <span className="sr-only">Cerrar</span>
                     </SheetClose>
                   </div>
-                  
+
                   <nav className="flex flex-col space-y-5">
                     <SheetClose asChild>
-                      <Link href="/" className={`${linkClass("/")} text-base`}>
-                        Inicio
-                      </Link>
+                      <Link href="/" className={`${linkClass("/")} text-base`}>Inicio</Link>
                     </SheetClose>
                     <SheetClose asChild>
-                      <Link href="/especialidades" className={`${linkClass("/especialidades")} text-base`}>
-                        Especialidades
-                      </Link>
+                      <Link href="/especialidades" className={`${linkClass("/especialidades")} text-base`}>Especialidades</Link>
                     </SheetClose>
                     <SheetClose asChild>
-                      <Link href="/como-funciona" className={`${linkClass("/como-funciona")} text-base`}>
-                        Cómo funciona
-                      </Link>
+                      <Link href="/como-funciona" className={`${linkClass("/como-funciona")} text-base`}>Cómo funciona</Link>
                     </SheetClose>
                     <SheetClose asChild>
-                      <Link href="/sobre-nosotros" className={`${linkClass("/sobre-nosotros")} text-base`}>
-                        Sobre nosotros
-                      </Link>
+                      <Link href="/sobre-nosotros" className={`${linkClass("/sobre-nosotros")} text-base`}>Sobre nosotros</Link>
                     </SheetClose>
                     <SheetClose asChild>
-                      <Link href="/catalogo-laboratorio" className={`${linkClass("/catalogo-laboratorio")} text-base`}>
-                        Catálogo de laboratorio
-                      </Link>
+                      <Link href="/catalogo-laboratorio" className={`${linkClass("/catalogo-laboratorio")} text-base`}>Catálogo de laboratorio</Link>
                     </SheetClose>
                     <SheetClose asChild>
-                      <Link href="/precios" className={`${linkClass("/precios")} text-base`}>
-                        Precios
-                      </Link>
+                      <Link href="/precios" className={`${linkClass("/precios")} text-base`}>Precios</Link>
                     </SheetClose>
                   </nav>
-                  
+
                   <div className="mt-auto space-y-4">
                     <SheetClose asChild>
                       <ContactForm 
                         trigger={
-                          <Button variant="outline" className="w-full">
-                            Contactar ventas
-                          </Button>
+                          <Button variant="outline" className="w-full">Contactar ventas</Button>
                         }
                         title="Contactar con nuestro equipo de ventas"
                         description="Completa el formulario y un asesor se pondrá en contacto contigo para ayudarte a elegir la mejor solución para tu negocio."
                       />
                     </SheetClose>
-                    
+
                     {!user ? (
                       <div className="grid gap-3 grid-cols-2">
                         <SheetClose asChild>
@@ -175,9 +144,7 @@ const Navbar = () => {
                       <div className="grid gap-3 grid-cols-1">
                         <SheetClose asChild>
                           <Link href={user.userType === "patient" ? "/dashboard/patient" : user.userType === "doctor" ? "/dashboard/doctor" : "/dashboard/admin"}>
-                            <Button variant="outline" className="w-full">
-                              Ir al dashboard
-                            </Button>
+                            <Button variant="outline" className="w-full">Ir al dashboard</Button>
                           </Link>
                         </SheetClose>
                         <SheetClose asChild>

@@ -19,7 +19,7 @@ export default function ComoFuncionaPage() {
                 <section className="bg-primary-500 py-12">
                     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
                         <h1 className="text-3xl font-extrabold sm:text-4xl md:text-5xl">
-                            ¿Cómo funciona MediConnect?
+                            ¿Cómo funciona Medicfy?
                         </h1>
                         <p className="mt-3 max-w-md mx-auto text-lg text-primary-50 sm:text-xl md:mt-5 md:max-w-3xl">
                             Conectamos pacientes con médicos certificados a
@@ -35,7 +35,7 @@ export default function ComoFuncionaPage() {
                                 Un proceso simple en 3 pasos
                             </h2>
                             <p className="mt-4 max-w-2xl text-xl text-gray-500 mx-auto">
-                                MediConnect hace que recibir atención médica sea
+                                Medicfy hace que recibir atención médica sea
                                 simple y accesible para todos.
                             </p>
                         </div>
@@ -250,7 +250,7 @@ export default function ComoFuncionaPage() {
                                     principal, completa el formulario con tus
                                     datos personales y crea una contraseña
                                     segura. ¡Listo! Ya puedes empezar a utilizar
-                                    MediConnect.
+                                    Medicfy.
                                 </p>
                             </div>
 
@@ -311,7 +311,7 @@ export default function ComoFuncionaPage() {
                         </h2>
                         <p className="mt-4 max-w-2xl mx-auto text-xl text-primary-100">
                             Únete a miles de pacientes y médicos que ya están
-                            utilizando MediConnect.
+                            utilizando Medicfy.
                         </p>
                         <div className="mt-8 flex justify-center gap-4 flex-wrap">
                             <Button size="lg" variant="secondary" asChild>

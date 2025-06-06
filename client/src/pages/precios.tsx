@@ -27,7 +27,7 @@ export default function PreciosPage() {
                             </h1>
                             <p className="mt-4 text-xl text-gray-600 max-w-3xl mx-auto">
                                 Sin mensualidades ni costos ocultos. En
-                                MediConnect, creemos en un modelo justo para
+                                Medicfy, creemos en un modelo justo para
                                 todos los participantes.
                             </p>
                         </div>

@@ -16,7 +16,7 @@ export default function SobreNosotrosPage() {
                     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                         <div className="text-center">
                             <h1 className="text-4xl font-extrabold sm:text-5xl lg:text-6xl">
-                                Sobre MediConnect
+                                Sobre Medicfy
                             </h1>
                             <p className="mt-6 text-xl max-w-3xl mx-auto">
                                 Conectando pacientes con profesionales de la
@@ -153,10 +153,10 @@ export default function SobreNosotrosPage() {
                     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                         <div className="text-center mb-12">
                             <h2 className="text-3xl font-bold text-gray-900">
-                                ¿Qué es MediConnect?
+                                ¿Qué es Medicfy?
                             </h2>
                             <p className="mt-4 text-xl text-gray-600 max-w-3xl mx-auto">
-                                MediConnect es una plataforma médica basada en
+                                Medicfy es una plataforma médica basada en
                                 suscripción que conecta pacientes con doctores
                                 certificados.
                             </p>

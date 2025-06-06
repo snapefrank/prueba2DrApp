@@ -19,6 +19,8 @@ import { Link } from "wouter";
 import { useQuery } from "@tanstack/react-query";
 import { AlertOctagon } from "lucide-react";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import logoMedicfy from "@/assets/medicfylogo.jpeg";
+
 
 // Interfaz que define la estructura de una especialidad médica
 interface Specialty {
@@ -65,24 +67,24 @@ export default function AuthPage() {
   const { user, loginMutation, registerMutation, error } = useAuth();
   const [activeTab, setActiveTab] = useState<string>("login");
   const [specialtiesList, setSpecialtiesList] = useState<Specialty[]>([]);
-  const [authInfo, setAuthInfo] = useState<{visible: boolean, info: string}>({visible: false, info: ""});
+  const [authInfo, setAuthInfo] = useState<{ visible: boolean, info: string }>({ visible: false, info: "" });
   const search = useSearch();
   const params = new URLSearchParams(search);
   const [, setLocation] = useLocation();
-  
+
   // Obtener especialidades para el selector
   const { data: specialties, isLoading: loadingSpecialties } = useQuery({
     queryKey: ["/api/specialties"],
     enabled: activeTab === "register", // Solo hacer la consulta si estamos en el tab de registro
   });
-  
+
   // Actualizar la lista de especialidades cuando cambian los datos
   useEffect(() => {
     if (specialties) {
       setSpecialtiesList(specialties as Specialty[]);
     }
   }, [specialties]);
-  
+
   // Login form setup
   const loginForm = useForm<LoginFormData>({
     resolver: zodResolver(loginSchema),
@@ -123,15 +125,15 @@ export default function AuthPage() {
       diplomaFile: undefined,
     }
   });
-  
+
   // Observar el tipo de usuario para mostrar selector de especialidad si es médico
   const userType = registerForm.watch("userType");
-  
+
   // Maneja el cambio en los parámetros de URL
   useEffect(() => {
     if (params.get("register") === "true") {
       setActiveTab("register");
-      
+
       // Si viene con tipo de usuario preseleccionado, lo establecemos
       const userType = params.get("type");
       if (userType === "doctor") {
@@ -148,7 +150,7 @@ export default function AuthPage() {
     if (user) {
       console.log("Usuario autenticado detectado:", user);
       console.log(`[Auth] Redirigiendo a usuario ${user.userType} al dashboard central`);
-      
+
       // Forzar navegación directa con location.replace para evitar problemas con el historial
       setTimeout(() => {
         window.location.replace('/dashboard');
@@ -164,20 +166,20 @@ export default function AuthPage() {
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>, fieldName: 'licenseFile' | 'identificationFile' | 'diplomaFile') => {
     const files = e.target.files;
     if (!files || files.length === 0) return;
-    
+
     const file = files[0];
     // Actualizar el formulario
     registerForm.setValue(fieldName, file);
-    
+
     // Crear vista previa
     const reader = new FileReader();
     reader.onloadend = () => {
-      const previewType = fieldName === 'licenseFile' 
-        ? 'license' 
-        : fieldName === 'identificationFile' 
-          ? 'identification' 
+      const previewType = fieldName === 'licenseFile'
+        ? 'license'
+        : fieldName === 'identificationFile'
+          ? 'identification'
           : 'diploma';
-      
+
       setFilesPreview(prev => ({
         ...prev,
         [previewType]: reader.result as string
@@ -189,7 +191,7 @@ export default function AuthPage() {
   const onRegisterSubmit = async (data: RegisterFormData) => {
     // Remove passwordConfirm as it's not in the API schema
     const { passwordConfirm, licenseFile, identificationFile, diplomaFile, ...registerData } = data;
-    
+
     // Validar que se haya seleccionado una especialidad para médicos
     if (registerData.userType === UserType.DOCTOR) {
       if (!registerData.specialtyId) {
@@ -199,7 +201,7 @@ export default function AuthPage() {
         });
         return;
       }
-      
+
       if (!registerData.professionalType) {
         registerForm.setError("professionalType", {
           type: "manual",
@@ -207,7 +209,7 @@ export default function AuthPage() {
         });
         return;
       }
-      
+
       if (!registerData.licenseNumber || registerData.licenseNumber.length < 5) {
         registerForm.setError("licenseNumber", {
           type: "manual",
@@ -215,7 +217,7 @@ export default function AuthPage() {
         });
         return;
       }
-      
+
       if (!licenseFile) {
         registerForm.setError("licenseFile", {
           type: "manual",
@@ -224,7 +226,7 @@ export default function AuthPage() {
         return;
       }
     }
-    
+
     // Aquí deberíamos subir los archivos y obtener las URLs
     // Por ahora, solo enviamos los datos básicos
     registerMutation.mutate(registerData as InsertUser);
@@ -251,14 +253,14 @@ export default function AuthPage() {
         <div className="w-full max-w-md">
           <div className="text-center mb-8">
             <Link href="/" className="text-primary-600 text-3xl font-bold">
-              MediConnect
+              Medicfy
             </Link>
             <h2 className="mt-6 text-3xl font-extrabold text-gray-900">
               {activeTab === "login" ? "Iniciar Sesión" : "Crear una Cuenta"}
             </h2>
             <p className="mt-2 text-sm text-gray-600">
-              {activeTab === "login" 
-                ? "Ingresa tus credenciales para acceder" 
+              {activeTab === "login"
+                ? "Ingresa tus credenciales para acceder"
                 : "Completa el formulario para registrarte"}
             </p>
             {/* Botón temporal para depuración */}
@@ -282,36 +284,36 @@ export default function AuthPage() {
 
           {/* Botones de acceso directo */}
           <div className="grid grid-cols-2 gap-2 mb-6">
-            <Button 
-              onClick={loginAsDoctor} 
-              variant="outline" 
+            <Button
+              onClick={loginAsDoctor}
+              variant="outline"
               disabled={directLoginLoading}
               className="border-blue-500 hover:bg-blue-50"
             >
               {directLoginLoading ? <Loader2 className="h-4 w-4 animate-spin mr-2" /> : null}
               Acceder como Médico
             </Button>
-            <Button 
-              onClick={loginAsPatient} 
-              variant="outline" 
+            <Button
+              onClick={loginAsPatient}
+              variant="outline"
               disabled={directLoginLoading}
               className="border-green-500 hover:bg-green-50"
             >
               {directLoginLoading ? <Loader2 className="h-4 w-4 animate-spin mr-2" /> : null}
               Acceder como Paciente
             </Button>
-            <Button 
-              onClick={loginAsAdmin} 
-              variant="outline" 
+            <Button
+              onClick={loginAsAdmin}
+              variant="outline"
               disabled={directLoginLoading}
               className="border-purple-500 hover:bg-purple-50"
             >
               {directLoginLoading ? <Loader2 className="h-4 w-4 animate-spin mr-2" /> : null}
               Acceder como Admin
             </Button>
-            <Button 
-              onClick={loginAsLab} 
-              variant="outline" 
+            <Button
+              onClick={loginAsLab}
+              variant="outline"
               disabled={directLoginLoading}
               className="border-amber-500 hover:bg-amber-50"
             >
@@ -325,7 +327,7 @@ export default function AuthPage() {
               <TabsTrigger value="login">Iniciar Sesión</TabsTrigger>
               <TabsTrigger value="register">Registrarse</TabsTrigger>
             </TabsList>
-            
+
             <TabsContent value="login">
               <Card>
                 <CardContent className="pt-6">
@@ -344,7 +346,7 @@ export default function AuthPage() {
                           </FormItem>
                         )}
                       />
-                      
+
                       <FormField
                         control={loginForm.control}
                         name="password"
@@ -378,7 +380,7 @@ export default function AuthPage() {
                           </Link>
                         </div>
                       </div>
-                      
+
                       <Button
                         type="submit"
                         className="w-full"
@@ -407,7 +409,7 @@ export default function AuthPage() {
                       </span>
                     </div>
                   </div>
-                  
+
                   <div className="grid grid-cols-2 gap-3">
                     <Button variant="outline" type="button">
                       <svg className="mr-2 h-4 w-4" viewBox="0 0 24 24">
@@ -440,7 +442,7 @@ export default function AuthPage() {
                 </CardFooter>
               </Card>
             </TabsContent>
-            
+
             <TabsContent value="register">
               <Card>
                 <CardContent className="pt-6">
@@ -460,7 +462,7 @@ export default function AuthPage() {
                             </FormItem>
                           )}
                         />
-                        
+
                         <FormField
                           control={registerForm.control}
                           name="lastName"
@@ -475,7 +477,7 @@ export default function AuthPage() {
                           )}
                         />
                       </div>
-                      
+
                       <FormField
                         control={registerForm.control}
                         name="username"
@@ -489,7 +491,7 @@ export default function AuthPage() {
                           </FormItem>
                         )}
                       />
-                      
+
                       <FormField
                         control={registerForm.control}
                         name="email"
@@ -503,7 +505,7 @@ export default function AuthPage() {
                           </FormItem>
                         )}
                       />
-                      
+
                       <FormField
                         control={registerForm.control}
                         name="userType"
@@ -525,7 +527,7 @@ export default function AuthPage() {
                           </FormItem>
                         )}
                       />
-                      
+
                       {/* Campos adicionales para médicos */}
                       {userType === UserType.DOCTOR && (
                         <>
@@ -536,8 +538,8 @@ export default function AuthPage() {
                             render={({ field }) => (
                               <FormItem>
                                 <FormLabel>Tipo de Profesional</FormLabel>
-                                <Select 
-                                  onValueChange={field.onChange} 
+                                <Select
+                                  onValueChange={field.onChange}
                                   value={field.value}
                                 >
                                   <FormControl>
@@ -567,8 +569,8 @@ export default function AuthPage() {
                             render={({ field }) => (
                               <FormItem>
                                 <FormLabel>Especialidad</FormLabel>
-                                <Select 
-                                  onValueChange={(value) => field.onChange(parseInt(value, 10))} 
+                                <Select
+                                  onValueChange={(value) => field.onChange(parseInt(value, 10))}
                                   value={field.value?.toString()}
                                 >
                                   <FormControl>
@@ -620,15 +622,15 @@ export default function AuthPage() {
                             />
                             {filesPreview.license && (
                               <div className="mt-2 border rounded p-2 relative">
-                                <img 
-                                  src={filesPreview.license} 
-                                  alt="Vista previa de cédula" 
+                                <img
+                                  src={filesPreview.license}
+                                  alt="Vista previa de cédula"
                                   className="w-full h-auto max-h-40 object-contain"
                                 />
-                                <Button 
-                                  type="button" 
-                                  variant="outline" 
-                                  size="icon" 
+                                <Button
+                                  type="button"
+                                  variant="outline"
+                                  size="icon"
                                   className="absolute top-2 right-2 h-6 w-6 rounded-full bg-white"
                                   onClick={() => {
                                     setFilesPreview(prev => ({ ...prev, license: null }));
@@ -656,15 +658,15 @@ export default function AuthPage() {
                             />
                             {filesPreview.identification && (
                               <div className="mt-2 border rounded p-2 relative">
-                                <img 
-                                  src={filesPreview.identification} 
-                                  alt="Vista previa de identificación" 
+                                <img
+                                  src={filesPreview.identification}
+                                  alt="Vista previa de identificación"
                                   className="w-full h-auto max-h-40 object-contain"
                                 />
-                                <Button 
-                                  type="button" 
-                                  variant="outline" 
-                                  size="icon" 
+                                <Button
+                                  type="button"
+                                  variant="outline"
+                                  size="icon"
                                   className="absolute top-2 right-2 h-6 w-6 rounded-full bg-white"
                                   onClick={() => {
                                     setFilesPreview(prev => ({ ...prev, identification: null }));
@@ -689,15 +691,15 @@ export default function AuthPage() {
                             />
                             {filesPreview.diploma && (
                               <div className="mt-2 border rounded p-2 relative">
-                                <img 
-                                  src={filesPreview.diploma} 
-                                  alt="Vista previa de diploma" 
+                                <img
+                                  src={filesPreview.diploma}
+                                  alt="Vista previa de diploma"
                                   className="w-full h-auto max-h-40 object-contain"
                                 />
-                                <Button 
-                                  type="button" 
-                                  variant="outline" 
-                                  size="icon" 
+                                <Button
+                                  type="button"
+                                  variant="outline"
+                                  size="icon"
                                   className="absolute top-2 right-2 h-6 w-6 rounded-full bg-white"
                                   onClick={() => {
                                     setFilesPreview(prev => ({ ...prev, diploma: null }));
@@ -715,7 +717,7 @@ export default function AuthPage() {
                           </div>
                         </>
                       )}
-                      
+
                       <FormField
                         control={registerForm.control}
                         name="password"
@@ -729,7 +731,7 @@ export default function AuthPage() {
                           </FormItem>
                         )}
                       />
-                      
+
                       <FormField
                         control={registerForm.control}
                         name="passwordConfirm"
@@ -743,7 +745,7 @@ export default function AuthPage() {
                           </FormItem>
                         )}
                       />
-                      
+
                       <Button
                         type="submit"
                         className="w-full"
@@ -778,23 +780,35 @@ export default function AuthPage() {
           </Tabs>
         </div>
       </div>
-      
+
       {/* Right Column - Hero Image */}
-      <div className="hidden lg:block lg:w-1/2 bg-gradient-to-br from-primary-500 to-primary-700">
-        <div className="h-full flex flex-col justify-center items-center px-12 text-center">
-          <h1 className="text-4xl font-bold text-white mb-6">
-            Salud al alcance de todos
-          </h1>
-          <p className="text-primary-100 text-xl mb-8 max-w-lg">
-            MediConnect te ofrece una plataforma médica basada en suscripción que permite tener acceso fácil, rápido y organizado a servicios de salud.
-          </p>
-          <img 
-            src="https://images.unsplash.com/photo-1505751172876-fa1923c5c528?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" 
-            alt="Médicos trabajando" 
-            className="rounded-lg shadow-2xl max-w-md"
-          />
-        </div>
-      </div>
+      {/* Right Column - Hero Image */}
+<div className="hidden lg:block lg:w-1/2 bg-gradient-to-br from-primary-500 to-primary-700">
+  <div className="h-full flex flex-col justify-center items-center px-12 text-center">
+    <div className="flex items-center space-x-6 mb-8"> {/* Más espacio entre logo y texto */}
+      <img 
+        src={logoMedicfy} 
+        alt="Logo Medicfy" 
+        className="h-24"  
+      />
+      <h2 className="text-6xl font-bold text-black"> {/* Aumentado a text-6xl y bold */}
+        Medicfy
+      </h2>
+    </div>
+    {/* Resto del contenido SIN cambios (se mantiene igual) */}
+    <h1 className="text-4xl font-bold text-black mb-6">
+      Salud al alcance de todos
+    </h1>
+    <p className="text-primary-100 text-xl mb-8 max-w-lg">
+      Medicfy te ofrece una plataforma médica basada en suscripción que permite tener acceso fácil, rápido y organizado a servicios de salud.
+    </p>
+    <img
+      src="https://images.unsplash.com/photo-1505751172876-fa1923c5c528?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
+      alt="Médicos trabajando"
+      className="rounded-lg shadow-2xl max-w-md"
+    />
+  </div>
+</div>
     </div>
   );
 }

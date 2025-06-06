@@ -22,7 +22,7 @@ export default function HomePage() {
                             <p className="mt-3 max-w-md text-lg text-primary-50 sm:text-xl md:mt-5 md:max-w-3xl">
                                 Acceso fácil, rápido y organizado a servicios de
                                 salud sin pertenecer a una aseguradora. Con
-                                MediConnect, obtén atención médica cuando la
+                                Medicfy, obtén atención médica cuando la
                                 necesites, sin filas ni complicaciones.
                             </p>
                             <div className="mt-8 flex flex-col sm:flex-row gap-4">
@@ -732,7 +732,7 @@ export default function HomePage() {
                                         </div>
                                     </div>
                                     <blockquote className="mt-4 text-gray-600">
-                                        "MediConnect me ha cambiado la vida.
+                                        "Medicfy me ha cambiado la vida.
                                         Puedo programar citas sin complicaciones
                                         y siempre encuentro al especialista que
                                         necesito."

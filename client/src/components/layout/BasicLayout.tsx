@@ -12,7 +12,7 @@ export default function BasicLayout({ children }: BasicLayoutProps) {
                 <div className="container mx-auto flex items-center justify-between">
                     <Link href="/">
                         <a className="text-2xl font-bold text-primary">
-                            MediConnectasdfasd
+                            Medicfy
                         </a>
                     </Link>
                     <nav>

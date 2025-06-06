@@ -8,10 +8,10 @@ interface DashboardShellProps {
 
 export default function DashboardShell({ children }: DashboardShellProps) {
   return (
-    <div className="flex min-h-screen flex-col">
-      <DashboardHeader />
-      <div className="flex flex-1">
-        <DashboardSidebar />
+    <div className="flex min-h-screen">
+      <DashboardSidebar />
+      <div className="flex flex-1 flex-col w-full">
+        <DashboardHeader /> {/* Ahora está alineado al contenido principal */}
         <main className="flex-1 overflow-y-auto">
           {children}
         </main>

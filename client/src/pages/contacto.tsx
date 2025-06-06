@@ -106,7 +106,7 @@ export default function ContactoPage() {
           <div className="text-center mb-12">
             <h1 className="text-4xl font-bold text-gray-900 mb-4">Contáctanos</h1>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Estamos aquí para responder tus preguntas y ayudarte con cualquier inquietud que tengas sobre MediConnect.
+              Estamos aquí para responder tus preguntas y ayudarte con cualquier inquietud que tengas sobre Medicfy.
             </p>
           </div>
           
@@ -133,8 +133,8 @@ export default function ContactoPage() {
                     <Mail className="h-6 w-6 text-primary mr-3 mt-0.5" />
                     <div>
                       <h3 className="text-base font-medium text-gray-900">Correo electrónico</h3>
-                      <p className="mt-1 text-gray-600">contacto@mediconnect.com</p>
-                      <p className="text-gray-600">soporte@mediconnect.com</p>
+                      <p className="mt-1 text-gray-600">contacto@medicfy.com</p>
+                      <p className="text-gray-600">soporte@medicfy.com</p>
                     </div>
                   </div>
                   
